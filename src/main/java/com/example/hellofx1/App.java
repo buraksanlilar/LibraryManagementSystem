@@ -28,7 +28,7 @@ public class App extends Application {
         txtInfo.clear();
     }
 
-
+//denen
     @Override
     public void start(Stage stage) throws Exception {
         VBox mainLayout = new VBox();
