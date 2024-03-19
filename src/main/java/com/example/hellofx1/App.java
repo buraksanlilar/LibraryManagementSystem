@@ -54,7 +54,6 @@ public class App extends Application {
         VBox.setMargin(listView, new Insets(8));
         VBox.setMargin(lastLine, new Insets(8));
         // dış duvarla arasındaki mesafeyi ayarlıyor
-
         firstLine.getChildren().addAll(
                 label, txtInfo, bttnAdd
         );
@@ -64,7 +63,7 @@ public class App extends Application {
 
         Scene scene = new Scene(mainLayout, 400,
                 300);
-
+        String burak = "kanka valla deniyom";
         stage.setTitle("Book Catalog");
         stage.setScene(scene);
         stage.show();
