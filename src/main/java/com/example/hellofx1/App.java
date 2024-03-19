@@ -54,6 +54,7 @@ public class App extends Application {
         VBox.setMargin(listView, new Insets(8));
         VBox.setMargin(lastLine, new Insets(8));
         // dış duvarla arasındaki mesafeyi ayarlıyor
+        //velevki
         firstLine.getChildren().addAll(
                 label, txtInfo, bttnAdd
         );
