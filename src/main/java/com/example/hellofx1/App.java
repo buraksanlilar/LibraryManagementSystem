@@ -68,6 +68,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+
+
         VBox mainLayout = new VBox();
         TextArea textArea = new TextArea();
         VBox.setVgrow(textArea,Priority.ALWAYS);
