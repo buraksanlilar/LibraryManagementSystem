@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hellofx1.MainController">
    <children>
-      <BorderPane prefHeight="494.0" prefWidth="702.0">
+      <BorderPane>
          <top>
             <MenuBar prefHeight="7.0" prefWidth="702.0" BorderPane.alignment="CENTER">
               <menus>
@@ -31,52 +30,27 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#helpDisplay" text="About" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
          </top>
          <right>
-            <VBox prefHeight="476.0" prefWidth="135.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="477.0" prefWidth="135.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="135.0" text="Add Book">
-                     <graphic>
-                        <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../Downloads/add.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="135.0" text="Add Book" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="130.0" prefWidth="135.0" text="Remove Book">
-                     <graphic>
-                        <ImageView fitHeight="67.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../Downloads/remove.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="138.0" prefWidth="135.0" text="Edit Book">
-                     <graphic>
-                        <ImageView fitHeight="64.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../Downloads/remove.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="145.0" prefWidth="135.0" text="Search Book">
-                     <graphic>
-                        <ImageView fitHeight="52.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../Downloads/search.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="130.0" prefWidth="135.0" text="Remove Book" />
+                  <Button mnemonicParsing="false" prefHeight="138.0" prefWidth="135.0" text="Edit Book" />
+                  <Button mnemonicParsing="false" prefHeight="145.0" prefWidth="135.0" text="Search Book" />
                </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
             </VBox>
          </right>
          <center>
@@ -88,9 +62,9 @@
                   </content>
                 </Tab>
                 <Tab text="Untitled Tab 2">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                     </content>
                 </Tab>
               </tabs>
             </TabPane>
