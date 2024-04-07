@@ -20,7 +20,7 @@ public class App extends Application {
         stage.setTitle("FXMLLoader Example");
         stage.setScene(new Scene(fxmlLoader.load(), 1141, 653));
         stage.show();
-        System.out.println("eren");
+
 
     }
 }
