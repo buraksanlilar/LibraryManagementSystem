@@ -1,6 +1,7 @@
 package com.example.hellofx1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Book {
     private String title;
@@ -14,7 +15,7 @@ public class Book {
     private String edition;
     private int page;
     private String coverImage;
-    private ArrayList<String> Tags;
+    private ArrayList<String> tags;
     public String getTitle() {
         return title;
     }
@@ -35,16 +36,20 @@ public class Book {
         return authors;
     }
 
-    public void setAuthors(ArrayList<String> authors) {
-        this.authors = authors;
+    public void setAuthors(String authors) {
+        String newString = authors.replaceAll("\\s+","");
+        String[] stringArr = authors.split(",");
+        this.authors = new ArrayList<>(Arrays.asList(stringArr));
     }
 
     public ArrayList<String> getTranslators() {
         return translators;
     }
 
-    public void setTranslators(ArrayList<String> translators) {
-        this.translators = translators;
+    public void setTranslators(String translators) {
+        String newString = translators.replaceAll("\\s+","");
+        String[] stringArr = translators.split(",");
+        this.translators = new ArrayList<>(Arrays.asList(stringArr));
     }
 
     public String getIsbn() {
@@ -103,12 +108,18 @@ public class Book {
         this.coverImage = coverImage;
     }
 
-    public ArrayList<String> getTags() {
-        return Tags;
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
     }
 
-    public void setTags(ArrayList<String> tags) {
-        Tags = tags;
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        String newString = tags.replaceAll("\\s+","");
+        String[] stringArr = tags.split(",");
+        this.tags = new ArrayList<>(Arrays.asList(stringArr));
     }
     public Book(){
 
