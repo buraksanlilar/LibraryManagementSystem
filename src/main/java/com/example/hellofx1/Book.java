@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Book {
     private String title;
-    private String subTitle;
+    private String subtitle;
     private ArrayList<String> authors;
     private ArrayList<String>translators;
     private String isbn;
@@ -21,15 +21,19 @@ public class Book {
     }
 
     public void setTitle(String title) {
+        if(title==null) this.title = "unknown";
         this.title = title;
     }
 
     public String getSubTitle() {
-        return subTitle;
+        return subtitle;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
+    public void setSubTitle(String subtitle) {
+        if(subtitle==null){
+            this.subtitle = "unknown";
+        }
+        this.subtitle = subtitle;
     }
 
     public ArrayList<String> getAuthors() {
