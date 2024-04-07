@@ -14,6 +14,7 @@ public class Book {
     private String edition;
     private int page;
     private String coverImage;
+    private ArrayList<String> Tags;
     public String getTitle() {
         return title;
     }
@@ -101,9 +102,16 @@ public class Book {
     public void setCoverImage(String coverImage) {
         this.coverImage = coverImage;
     }
+
+    public ArrayList<String> getTags() {
+        return Tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        Tags = tags;
+    }
     public Book(){
 
     }
-
 
 }

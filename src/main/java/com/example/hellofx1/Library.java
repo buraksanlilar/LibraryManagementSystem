@@ -1,11 +1,14 @@
 package com.example.hellofx1;
 
+import javafx.scene.control.ListView;
+
 import java.util.ArrayList;
 
 public class Library {
-    ArrayList<Book> books;
+    public static ArrayList<Book> books = new ArrayList<>();
     CatalogFunctions catalogFunctions;
-    public void run(){
+    public Library(){
 
     }
+
 }
