@@ -6,11 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.*;
 import java.io.*;
 
 
 public class MainController  {
+    @FXML
+    private TableView<Book> bookTableView;
+    @FXML
+    private TableColumn<Book, String> Title;
     @FXML
     private Button AddButton;
     @FXML
@@ -44,7 +50,6 @@ public class MainController  {
         addButton.setResizable(false);
 
         addButton.show();
-
     }
     @FXML
     public void helpDisplay(){
