@@ -19,11 +19,4 @@ public class CatalogFunctions {
     public void help(){
 
     }
-    public void printName(String name){
-        if(name=="selen"){
-            System.out.println("goodboy");
-        }else{
-            System.out.println("bitch");
-        }
-    }
 }
