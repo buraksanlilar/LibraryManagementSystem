@@ -55,19 +55,19 @@
                            <children>
                               <VBox layoutY="4.0" prefHeight="557.0" prefWidth="977.0">
                                  <children>
-                                    <TableView prefHeight="651.0" prefWidth="977.0">
+                                    <TableView fx:id="bookTableView" prefHeight="651.0" prefWidth="977.0">
                                       <columns>
-                                        <TableColumn prefWidth="75.0" text="Title" />
-                                        <TableColumn prefWidth="75.0" text="Subtitle" />
-                                          <TableColumn prefWidth="106.0" text="ISBN" />
-                                          <TableColumn prefWidth="44.0" text="Page" />
-                                          <TableColumn prefWidth="130.0" text="Authors" />
-                                          <TableColumn prefWidth="145.0" text="Translators" />
-                                          <TableColumn prefWidth="89.0" text="Publisher" />
-                                          <TableColumn prefWidth="83.0" text="Cover type" />
-                                          <TableColumn prefWidth="53.0" text="Edition" />
-                                          <TableColumn prefWidth="92.0" text="Tags" />
-                                          <TableColumn prefWidth="84.0" text="Date" />
+                                        <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+                                        <TableColumn fx:id="subtitle" prefWidth="75.0" text="Subtitle" />
+                                          <TableColumn fx:id="isbn" prefWidth="106.0" text="ISBN" />
+                                          <TableColumn fx:id="page" prefWidth="44.0" text="Page" />
+                                          <TableColumn fx:id="authors" prefWidth="130.0" text="Authors" />
+                                          <TableColumn fx:id="translators" prefWidth="145.0" text="Translators" />
+                                          <TableColumn fx:id="publisher" prefWidth="89.0" text="Publisher" />
+                                          <TableColumn fx:id="covertype" prefWidth="83.0" text="Cover type" />
+                                          <TableColumn fx:id="edition" prefWidth="53.0" text="Edition" />
+                                          <TableColumn fx:id="tags" prefWidth="92.0" text="Tags" />
+                                          <TableColumn fx:id="date" prefWidth="84.0" text="Date" />
                                       </columns>
                                     </TableView>
                                  </children>
