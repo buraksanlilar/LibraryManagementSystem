@@ -69,7 +69,6 @@ public class AddController {
         list.clear();
         list.addAll(books);
 
-
         ResetInput();
 
     }
