@@ -1,5 +1,6 @@
 package com.example.hellofx1;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import java.util.ArrayList;
 
 import static com.example.hellofx1.Library.books;
+import static com.example.hellofx1.MainController.list;
 
 public class AddController {
     @FXML
@@ -59,11 +61,14 @@ public class AddController {
         if(!page.getText().isEmpty()){
             newbook.setPage(Integer.parseInt(page.getText()));
         }
-
        // newbook.setCoverImage(image.getText());
         newbook.setTags(tag.getText());
 
         books.add(newbook);
+
+        list.clear();
+        list.addAll(books);
+
 
         ResetInput();
 
