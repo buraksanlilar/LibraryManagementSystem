@@ -5,16 +5,17 @@ import java.util.ArrayList;
 public class Book {
     private String title;
     private String subTitle;
-    private ArrayList<String> authors;
-    private ArrayList<String>translators;
+    private String authors;
+    private String translators;
     private String isbn;
     private String publisher;
     private String date;
-    private String coverType;
     private String edition;
-    private int page;
-    private String coverImage;
-    private ArrayList<String> Tags;
+    private String coverType;
+    private String language;
+    private int rating;
+    private int tags;
+
     public String getTitle() {
         return title;
     }
@@ -31,19 +32,19 @@ public class Book {
         this.subTitle = subTitle;
     }
 
-    public ArrayList<String> getAuthors() {
+    public String getAuthors() {
         return authors;
     }
 
-    public void setAuthors(ArrayList<String> authors) {
+    public void setAuthors(String authors) {
         this.authors = authors;
     }
 
-    public ArrayList<String> getTranslators() {
+    public String getTranslators() {
         return translators;
     }
 
-    public void setTranslators(ArrayList<String> translators) {
+    public void setTranslators(String translators) {
         this.translators = translators;
     }
 
@@ -71,14 +72,6 @@ public class Book {
         this.date = date;
     }
 
-    public String getCoverType() {
-        return coverType;
-    }
-
-    public void setCoverType(String coverType) {
-        this.coverType = coverType;
-    }
-
     public String getEdition() {
         return edition;
     }
@@ -87,31 +80,39 @@ public class Book {
         this.edition = edition;
     }
 
-    public int getPage() {
-        return page;
+    public String getCoverType() {
+        return coverType;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setCoverType(String coverType) {
+        this.coverType = coverType;
     }
 
-    public String getCoverImage() {
-        return coverImage;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
-    public ArrayList<String> getTags() {
-        return Tags;
+    public int getRating() {
+        return rating;
     }
 
-    public void setTags(ArrayList<String> tags) {
-        Tags = tags;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
+
+    public int getTags() {
+        return tags;
+    }
+
+    public void setTags(int tags) {
+        this.tags = tags;
+    }
+
     public Book(){
 
     }
-
 }
