@@ -84,5 +84,7 @@ public class AddController {
         page.clear();
         // image.clear();
         tag.clear();
+        covertype.clear();
+        date.setValue(null);
     }
 }
