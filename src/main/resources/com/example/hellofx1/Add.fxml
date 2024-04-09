@@ -167,8 +167,8 @@
                                     <AnchorPane prefHeight="63.0" prefWidth="306.0">
                                        <children>
                                           <Button layoutX="238.0" layoutY="8.0" mnemonicParsing="false" text="Close" />
-                                          <Button layoutX="108.0" layoutY="8.0" mnemonicParsing="false" onAction="#ResetInput" text="Reset" />
-                                          <Button layoutX="172.0" layoutY="8.0" mnemonicParsing="false" onAction="#AddNewBook" text="Add" />
+                                          <Button fx:id="resetButton" layoutX="108.0" layoutY="8.0" mnemonicParsing="false" onAction="#ResetInput" text="Reset" />
+                                          <Button fx:id="addButton" layoutX="172.0" layoutY="8.0" mnemonicParsing="false" onAction="#AddNewBook" text="Add" />
                                        </children>
                                     </AnchorPane>
                                  </children>

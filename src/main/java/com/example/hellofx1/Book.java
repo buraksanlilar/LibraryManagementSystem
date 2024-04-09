@@ -25,14 +25,11 @@ public class Book {
         this.title = title;
     }
 
-    public String getSubTitle() {
+    public String getSubtitle() {
         return subtitle;
     }
 
-    public void setSubTitle(String subtitle) {
-        if(subtitle==null){
-            this.subtitle = "unknown";
-        }
+    public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
     }
 
@@ -80,11 +77,11 @@ public class Book {
         this.date = date;
     }
 
-    public String getCoverType() {
+    public String getCovertype() {
         return coverType;
     }
 
-    public void setCoverType(String coverType) {
+    public void setCovertype(String coverType) {
         this.coverType = coverType;
     }
 
