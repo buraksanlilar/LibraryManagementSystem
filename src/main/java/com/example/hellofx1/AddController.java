@@ -48,7 +48,7 @@ public class AddController {
         Book newbook = new Book();
 
         newbook.setTitle(title.getText());
-        newbook.setSubTitle(subtitle.getText());
+        newbook.setSubtitle(subtitle.getText());
         newbook.setIsbn(isbn.getText());
         newbook.setAuthors(authors.getText());
         newbook.setTranslators(translators.getText());
@@ -56,7 +56,7 @@ public class AddController {
         if(date.getValue() != null){
             newbook.setDate(date.getValue().toString());
         }
-        newbook.setCoverType(covertype.getText());
+        newbook.setCovertype(covertype.getText());
         newbook.setEdition(edition.getText());
         if(!page.getText().isEmpty()){
             newbook.setPage(Integer.parseInt(page.getText()));

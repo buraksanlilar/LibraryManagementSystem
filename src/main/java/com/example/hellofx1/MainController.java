@@ -46,6 +46,7 @@ public class MainController implements Initializable {
     private TableColumn<Book, ArrayList<String>> tags;
     @FXML
     private TableColumn<Book,String> date;
+
     public static ObservableList<Book> list = FXCollections.observableArrayList(books);
     @FXML
     private Button AddButton;
@@ -55,17 +56,17 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        title.setCellValueFactory(new PropertyValueFactory<Book,String>("Title"));
-        subtitle.setCellValueFactory(new PropertyValueFactory<Book,String>("Subtitle"));
-        isbn.setCellValueFactory(new PropertyValueFactory<Book,String>("ISBN"));
-        page.setCellValueFactory(new PropertyValueFactory<Book,Integer>("Page"));
-        authors.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("Authors"));
-        translators.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("Translators"));
-        publisher.setCellValueFactory(new PropertyValueFactory<Book,String>("Publisher"));
-        covertype.setCellValueFactory(new PropertyValueFactory<Book,String>("Covertype"));
-        edition.setCellValueFactory(new PropertyValueFactory<Book,String>("Edition"));
-        tags.setCellValueFactory(new PropertyValueFactory<Book,ArrayList<String>>("Tags"));
-        date.setCellValueFactory(new PropertyValueFactory<Book,String>("Date"));
+        title.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
+        subtitle.setCellValueFactory(new PropertyValueFactory<Book,String>("subtitle"));
+        isbn.setCellValueFactory(new PropertyValueFactory<Book,String>("isbn"));
+        page.setCellValueFactory(new PropertyValueFactory<Book,Integer>("page"));
+        authors.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("authors"));
+        translators.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("translators"));
+        publisher.setCellValueFactory(new PropertyValueFactory<Book,String>("publisher"));
+        covertype.setCellValueFactory(new PropertyValueFactory<Book,String>("covertype"));
+        edition.setCellValueFactory(new PropertyValueFactory<Book,String>("edition"));
+        tags.setCellValueFactory(new PropertyValueFactory<Book,ArrayList<String>>("tags"));
+        date.setCellValueFactory(new PropertyValueFactory<Book,String>("date"));
 
         bookTableView.setItems(list);
 

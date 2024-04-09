@@ -52,13 +52,13 @@ public class SearchController {
 
         for (Book book : Library.books) {
             if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
-                    (subtitleSearch.isEmpty() || book.getSubTitle().toLowerCase().contains(subtitleSearch)) &&
+                    (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
                     (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&
                     (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
                     (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
                     (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
                     (dateSearch.isEmpty() || book.getDate().equals(dateSearch)) &&
-                    (coverTypeSearch.isEmpty() || book.getCoverType().toLowerCase().contains( coverTypeSearch)) &&
+                    (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains( coverTypeSearch)) &&
                     (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
                     (pageSearch.isEmpty() || book.getPage() == Integer.parseInt((pageSearch))) &&
                     (tagSearch.isEmpty() || book.getTags().contains(tagSearch))) {
