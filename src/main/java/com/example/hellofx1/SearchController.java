@@ -1,11 +1,10 @@
 package com.example.hellofx1;
 
-import com.example.hellofx1.Book;
-import com.example.hellofx1.Library;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import java.util.ArrayList;
+import static com.example.hellofx1.MainController.observableBookList;
 
 public class SearchController {
     @FXML
@@ -33,8 +32,8 @@ public class SearchController {
 
 
 
-
-    private ArrayList<Book> searchBooks() {
+    @FXML
+    public ArrayList<Book> searchBooks() {
         String titleSearch = title.getText().toLowerCase();
         String subtitleSearch = subtitle.getText().toLowerCase();
         String isbnSearch = isbn.getText();
@@ -50,7 +49,7 @@ public class SearchController {
         ArrayList<Book> results = new ArrayList<>();
 
 
-        for (Book book : Library.books) {
+        for (Book book : observableBookList ) {
             if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
                     (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
                     (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&

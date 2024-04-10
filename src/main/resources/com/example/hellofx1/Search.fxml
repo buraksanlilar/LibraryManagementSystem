@@ -135,7 +135,7 @@
                 </HBox>
                 <AnchorPane prefHeight="64.0" prefWidth="428.0">
                     <children>
-                        <Button layoutX="342.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Search" />
+                        <Button layoutX="342.0" layoutY="-2.0" mnemonicParsing="false" onAction="#searchBooks" prefHeight="26.0" prefWidth="82.0" text="Search" />
                         <ImageView fitHeight="26.0" fitWidth="18.0" layoutX="348.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                             <image>
 

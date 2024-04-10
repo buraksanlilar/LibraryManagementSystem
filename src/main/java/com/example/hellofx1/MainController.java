@@ -3,14 +3,13 @@ package com.example.hellofx1;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.*;
 import java.io.*;
@@ -18,7 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static com.example.hellofx1.Library.books;
 
 
 public class MainController implements Initializable {
@@ -47,7 +45,7 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Book,String> date;
 
-    public static ObservableList<Book> list = FXCollections.observableArrayList(books);
+    public static ObservableList<Book> observableBookList = FXCollections.observableArrayList();
     @FXML
     private Button AddButton;
     @FXML
@@ -55,6 +53,8 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        bookTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         title.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         subtitle.setCellValueFactory(new PropertyValueFactory<Book,String>("subtitle"));
@@ -68,8 +68,16 @@ public class MainController implements Initializable {
         tags.setCellValueFactory(new PropertyValueFactory<Book,ArrayList<String>>("tags"));
         date.setCellValueFactory(new PropertyValueFactory<Book,String>("date"));
 
-        bookTableView.setItems(list);
 
+        bookTableView.setItems(observableBookList);
+
+    }
+    /*/ handle column edits*/
+    public void titleCol_OnEdit(Event e){
+        TableColumn.CellEditEvent<Book,String> cellEditEvent;
+        cellEditEvent = (TableColumn.CellEditEvent<Book,String>) e;
+        Book book = cellEditEvent.getRowValue();
+        book.setTitle(cellEditEvent.getNewValue());
     }
     @FXML
     public void SearchButton() {
@@ -101,6 +109,22 @@ public class MainController implements Initializable {
 
         addButton.show();
     }
+    @FXML
+    public void DeleteButton(ActionEvent event){
+        if(!observableBookList.isEmpty()){
+            Alert deleteAlert = new Alert(Alert.AlertType.WARNING,"Confirm", ButtonType.OK,ButtonType.CANCEL);
+            deleteAlert.setContentText("Are you sure you want to delete this?\n\n THIS CANNOT BE UNDONE.");
+            deleteAlert.initModality(Modality.APPLICATION_MODAL);
+            deleteAlert.showAndWait();
+            if(deleteAlert.getResult() == ButtonType.OK){
+                observableBookList.removeAll(bookTableView.getSelectionModel().getSelectedItems());
+                bookTableView.getSelectionModel().clearSelection();
+            } else{
+                deleteAlert.close();
+            }
+        }
+    }
+
 
     @FXML
     public void helpDisplay(){

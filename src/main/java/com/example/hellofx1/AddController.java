@@ -1,16 +1,11 @@
 package com.example.hellofx1;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
-
-import static com.example.hellofx1.Library.books;
-import static com.example.hellofx1.MainController.list;
+import static com.example.hellofx1.MainController.observableBookList;
 
 public class AddController {
     @FXML
@@ -50,8 +45,10 @@ public class AddController {
         newbook.setTitle(title.getText());
         newbook.setSubtitle(subtitle.getText());
         newbook.setIsbn(isbn.getText());
+
         newbook.setAuthors(authors.getText());
         newbook.setTranslators(translators.getText());
+
         newbook.setPublisher(publisher.getText());
         if(date.getValue() != null){
             newbook.setDate(date.getValue().toString());
@@ -62,12 +59,11 @@ public class AddController {
             newbook.setPage(Integer.parseInt(page.getText()));
         }
        // newbook.setCoverImage(image.getText());
+
+
         newbook.setTags(tag.getText());
 
-        books.add(newbook);
-
-        list.clear();
-        list.addAll(books);
+        observableBookList.add(newbook);
 
         ResetInput();
 
