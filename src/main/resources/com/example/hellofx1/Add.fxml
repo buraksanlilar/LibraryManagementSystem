@@ -148,7 +148,7 @@
                                     <AnchorPane prefHeight="58.0" prefWidth="311.0">
                                        <children>
                                           <Label layoutX="40.0" layoutY="28.0" prefHeight="18.0" prefWidth="77.0" text="Cover Image" />
-                                          <Button layoutX="179.0" layoutY="22.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" />
+                                          <Button fx:id="imageButton" layoutX="179.0" layoutY="22.0" mnemonicParsing="false" onAction="#addImage" prefHeight="30.0" prefWidth="66.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -158,7 +158,7 @@
                                     <AnchorPane prefHeight="57.0" prefWidth="307.0">
                                        <children>
                                           <Label layoutX="70.0" layoutY="20.0" text="Tags" />
-                                          <TextField fx:id="tag" layoutX="136.0" layoutY="16.0" />
+                                          <TextField fx:id="tags" layoutX="136.0" layoutY="16.0" />
                                        </children>
                                     </AnchorPane>
                                  </children></HBox>
@@ -166,9 +166,8 @@
                                  <children>
                                     <AnchorPane prefHeight="63.0" prefWidth="306.0">
                                        <children>
-                                          <Button layoutX="238.0" layoutY="8.0" mnemonicParsing="false" text="Close" />
-                                          <Button fx:id="resetButton" layoutX="108.0" layoutY="8.0" mnemonicParsing="false" onAction="#ResetInput" text="Reset" />
-                                          <Button fx:id="addButton" layoutX="172.0" layoutY="8.0" mnemonicParsing="false" onAction="#AddNewBook" text="Add" />
+                                          <Button fx:id="resetButton" layoutX="144.0" layoutY="9.0" mnemonicParsing="false" onAction="#ResetInput" text="Reset" />
+                                          <Button fx:id="addButton" layoutX="208.0" layoutY="9.0" mnemonicParsing="false" onAction="#AddNewBook" text="Add" />
                                        </children>
                                     </AnchorPane>
                                  </children>

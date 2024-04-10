@@ -44,8 +44,11 @@ public class MainController implements Initializable {
     private TableColumn<Book, ArrayList<String>> tags;
     @FXML
     private TableColumn<Book,String> date;
+    @FXML
+    private TableColumn<Book,String> coverimage;
 
     public static ObservableList<Book> observableBookList = FXCollections.observableArrayList();
+
     @FXML
     private Button AddButton;
     @FXML
@@ -67,6 +70,7 @@ public class MainController implements Initializable {
         edition.setCellValueFactory(new PropertyValueFactory<Book,String>("edition"));
         tags.setCellValueFactory(new PropertyValueFactory<Book,ArrayList<String>>("tags"));
         date.setCellValueFactory(new PropertyValueFactory<Book,String>("date"));
+        coverimage.setCellValueFactory(new PropertyValueFactory<Book,String>("coverImage"));
 
 
         bookTableView.setItems(observableBookList);

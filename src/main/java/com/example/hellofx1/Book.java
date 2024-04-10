@@ -6,8 +6,8 @@ import java.util.Arrays;
 public class Book {
     private String title;
     private String subtitle;
-    private ArrayList<String> authors;
-    private ArrayList<String>translators;
+    private String authors;
+    private String translators;
     private String isbn;
     private String publisher;
     private String date;
@@ -15,7 +15,7 @@ public class Book {
     private String edition;
     private int page;
     private String coverImage;
-    private ArrayList<String> tags;
+    private String tags;
     public String getTitle() {
         return title;
     }
@@ -32,24 +32,20 @@ public class Book {
         this.subtitle = subtitle;
     }
 
-    public ArrayList<String> getAuthors() {
+    public String getAuthors() {
         return authors;
     }
 
     public void setAuthors(String authors) {
-        String newString = authors.replaceAll("\\s+","");
-        String[] stringArr = authors.split(",");
-        this.authors = new ArrayList<>(Arrays.asList(stringArr));
+
     }
 
-    public ArrayList<String> getTranslators() {
+    public String getTranslators() {
         return translators;
     }
 
     public void setTranslators(String translators) {
-        String newString = translators.replaceAll("\\s+","");
-        String[] stringArr = translators.split(",");
-        this.translators = new ArrayList<>(Arrays.asList(stringArr));
+        this.translators = translators;
     }
 
     public String getIsbn() {
@@ -108,19 +104,14 @@ public class Book {
         this.coverImage = coverImage;
     }
 
-    public void setTags(ArrayList<String> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 
-    public ArrayList<String> getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
-        String newString = tags.replaceAll("\\s+","");
-        String[] stringArr = tags.split(",");
-        this.tags = new ArrayList<>(Arrays.asList(stringArr));
-    }
     public Book(){
 
     }

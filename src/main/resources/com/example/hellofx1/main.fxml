@@ -58,12 +58,13 @@
                                           <TableColumn fx:id="isbn" prefWidth="106.0" text="ISBN" />
                                           <TableColumn fx:id="page" prefWidth="44.0" text="Page" />
                                           <TableColumn fx:id="authors" prefWidth="130.0" text="Authors" />
-                                          <TableColumn fx:id="translators" prefWidth="145.0" text="Translators" />
-                                          <TableColumn fx:id="publisher" prefWidth="89.0" text="Publisher" />
-                                          <TableColumn fx:id="covertype" prefWidth="83.0" text="Cover type" />
-                                          <TableColumn fx:id="edition" prefWidth="53.0" text="Edition" />
-                                          <TableColumn fx:id="tags" prefWidth="92.0" text="Tags" />
-                                          <TableColumn fx:id="date" prefWidth="84.0" text="Date" />
+                                          <TableColumn fx:id="translators" prefWidth="94.0" text="Translators" />
+                                          <TableColumn fx:id="publisher" prefWidth="92.0" text="Publisher" />
+                                          <TableColumn fx:id="covertype" prefWidth="85.0" text="Cover type" />
+                                          <TableColumn fx:id="edition" prefWidth="55.0" text="Edition" />
+                                          <TableColumn fx:id="tags" prefWidth="76.0" text="Tags" />
+                                          <TableColumn fx:id="date" prefWidth="36.0" text="Date" />
+                                          <TableColumn fx:id="coverimage" prefWidth="108.0" text="Image path" />
                                       </columns>
                                     </TableView>
                                  </children>

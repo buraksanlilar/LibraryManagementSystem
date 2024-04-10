@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import java.util.ArrayList;
-import static com.example.hellofx1.MainController.observableBookList;
+import java.util.Arrays;
 
 public class SearchController {
     @FXML
@@ -29,10 +29,11 @@ public class SearchController {
     private TextField page;
     @FXML
     private TextField tag;
+    public static boolean control = true;
 
 
 
-    @FXML
+
     public ArrayList<Book> searchBooks() {
         String titleSearch = title.getText().toLowerCase();
         String subtitleSearch = subtitle.getText().toLowerCase();
@@ -49,7 +50,13 @@ public class SearchController {
         ArrayList<Book> results = new ArrayList<>();
 
 
-        for (Book book : observableBookList ) {
+
+        String newString = tagSearch.replaceAll("\\s+","");
+        String[] stringArr = tagSearch.split(",");
+        new ArrayList<>(Arrays.asList(stringArr));
+
+
+        for (Book book : MainController.observableBookList) {
             if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
                     (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
                     (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&
@@ -63,8 +70,17 @@ public class SearchController {
                     (tagSearch.isEmpty() || book.getTags().contains(tagSearch))) {
                 results.add(book);
             }
+
         }
 
         return results;
+    }
+
+    public void Show(){
+
+        ArrayList<Book> searchResults = searchBooks();
+
+
+        MainController.observableBookList.setAll(searchResults);
     }
 }
