@@ -21,7 +21,6 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        if(title==null) this.title = "unknown";
         this.title = title;
     }
 

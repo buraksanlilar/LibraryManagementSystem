@@ -101,6 +101,7 @@ public class MainController implements Initializable {
 
         addButton.show();
     }
+
     @FXML
     public void helpDisplay(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
