@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.*;
 import java.io.*;
 import java.net.URL;
@@ -72,8 +73,20 @@ public class MainController implements Initializable {
         date.setCellValueFactory(new PropertyValueFactory<Book,String>("date"));
         coverimage.setCellValueFactory(new PropertyValueFactory<Book,String>("coverImage"));
 
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+        subtitle.setCellFactory(TextFieldTableCell.forTableColumn());
+        isbn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+        title.setCellFactory(TextFieldTableCell.forTableColumn());
+
 
         bookTableView.setItems(observableBookList);
+        bookTableView.setEditable(true);
 
     }
     /*/ handle column edits*/

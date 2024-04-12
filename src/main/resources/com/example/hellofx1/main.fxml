@@ -53,7 +53,7 @@
                                  <children>
                                     <TableView fx:id="bookTableView" prefHeight="651.0" prefWidth="977.0">
                                       <columns>
-                                        <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+                                        <TableColumn fx:id="title" onEditCommit="#titleCol_OnEdit" prefWidth="75.0" text="Title" />
                                         <TableColumn fx:id="subtitle" prefWidth="75.0" text="Subtitle" />
                                           <TableColumn fx:id="isbn" prefWidth="106.0" text="ISBN" />
                                           <TableColumn fx:id="page" prefWidth="44.0" text="Page" />
