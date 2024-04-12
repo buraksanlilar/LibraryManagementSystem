@@ -63,7 +63,7 @@ public class AddController {
         }
     }
     public void saveBookInfoToJson(String title, String subtitle, String isbn, String authors, String translators, String publisher, String date,
-                                   String covertype, String edition, int page, String tags) {
+                                   String covertype, String edition, int page,String tags) {
         JsonObject bookJson = new JsonObject();
         bookJson.addProperty("title", title);
         bookJson.addProperty("subtitle", subtitle);
@@ -75,19 +75,39 @@ public class AddController {
         bookJson.addProperty("covertype", covertype);
         bookJson.addProperty("edition", edition);
         bookJson.addProperty("page", page);
-        bookJson.addProperty("tags", tags);
-        String folderPath = "books";
-        String filePath = folderPath + File.separator + title + ".json";
-        try (FileWriter file = new FileWriter(filePath)) {
 
+        bookJson.addProperty("tags", tags);
+
+
+        String folderPath = "books";
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        String baseFileName = title;
+        String filePath = folderPath + File.separator + baseFileName + ".json";
+        File file = new File(filePath);
+
+        int count = 1;
+        while (file.exists()) {
+            // aynı ad varsa arttırıor.
+            String uniqueFileName = baseFileName + "-" + count;
+            filePath = folderPath + File.separator + uniqueFileName + ".json";
+            file = new File(filePath);
+            count++;
+        }
+
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String jsonString = gson.toJson(bookJson);
-            file.write(jsonString);
+            fileWriter.write(jsonString);
             System.out.println("JSON OLUSTU.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 
 

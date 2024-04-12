@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Book {
-    private String title;
-    private String subtitle;
-    private String authors;
-    private String translators;
-    private String isbn;
-    private String publisher;
-    private String date;
-    private String coverType;
-    private String edition;
-    private int page;
-    private String coverImage;
-    private String tags;
+    public String title;
+    public String subtitle;
+    public String authors;
+    public String translators;
+    public String isbn;
+    public String publisher;
+    public String date;
+    public String coverType;
+    public String edition;
+    public int page;
+    public String coverImage;
+    public String tags;
     public String getTitle() {
         return title;
     }
