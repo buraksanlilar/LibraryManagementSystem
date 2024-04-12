@@ -1,21 +1,21 @@
 package com.example.hellofx1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Book {
     private String title;
-    private String subTitle;
+    private String subtitle;
     private String authors;
     private String translators;
     private String isbn;
     private String publisher;
     private String date;
-    private String edition;
     private String coverType;
-    private String language;
-    private int rating;
-    private int tags;
-
+    private String edition;
+    private int page;
+    private String coverImage;
+    private String tags;
     public String getTitle() {
         return title;
     }
@@ -24,12 +24,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getSubTitle() {
-        return subTitle;
+    public String getSubtitle() {
+        return subtitle;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public String getAuthors() {
@@ -37,7 +37,7 @@ public class Book {
     }
 
     public void setAuthors(String authors) {
-        this.authors = authors;
+
     }
 
     public String getTranslators() {
@@ -72,6 +72,14 @@ public class Book {
         this.date = date;
     }
 
+    public String getCovertype() {
+        return coverType;
+    }
+
+    public void setCovertype(String coverType) {
+        this.coverType = coverType;
+    }
+
     public String getEdition() {
         return edition;
     }
@@ -80,39 +88,32 @@ public class Book {
         this.edition = edition;
     }
 
-    public String getCoverType() {
-        return coverType;
+    public int getPage() {
+        return page;
     }
 
-    public void setCoverType(String coverType) {
-        this.coverType = coverType;
+    public void setPage(int page) {
+        this.page = page;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getCoverImage() {
+        return coverImage;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public int getTags() {
-        return tags;
-    }
-
-    public void setTags(int tags) {
+    public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getTags() {
+        return tags;
     }
 
     public Book(){
 
     }
+
 }
