@@ -1,13 +1,19 @@
 package com.example.hellofx1;
 
+import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.File;
+import java.io.FileWriter;
 
 import static com.example.hellofx1.MainController.observableBookList;
 
@@ -56,24 +62,45 @@ public class AddController {
             imagePath = file.getAbsolutePath();
         }
     }
+    public void saveBookInfoToJson(String title, String subtitle, String isbn, String authors, String translators, String publisher, String date,
+                                   String covertype, String edition, int page, String tags) {
+        JsonObject bookJson = new JsonObject();
+        bookJson.addProperty("title", title);
+        bookJson.addProperty("subtitle", subtitle);
+        bookJson.addProperty("isbn", isbn);
+        bookJson.addProperty("authors", authors);
+        bookJson.addProperty("translators", translators);
+        bookJson.addProperty("publisher", publisher);
+        bookJson.addProperty("date", date);
+        bookJson.addProperty("covertype", covertype);
+        bookJson.addProperty("edition", edition);
+        bookJson.addProperty("page", page);
+        bookJson.addProperty("tags", tags);
+        String folderPath = "books";
+        String filePath = folderPath + File.separator + title + ".json";
+        try (FileWriter file = new FileWriter(filePath)) {
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String jsonString = gson.toJson(bookJson);
+            file.write(jsonString);
+            System.out.println("JSON OLUSTU.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     @FXML
     public void AddNewBook(){
         Book newbook = new Book();
-
         newbook.setTitle(title.getText());
         newbook.setSubtitle(subtitle.getText());
         newbook.setIsbn(isbn.getText());
         newbook.setPublisher(publisher.getText());
-
-
         newbook.setAuthors(authors.getText());
         newbook.setTranslators(translators.getText());
         newbook.setTags(tags.getText());
-
-
-
         if(date.getValue() != null){
             newbook.setDate(date.getValue().toString());
         }
@@ -84,11 +111,8 @@ public class AddController {
         }
 
        newbook.setCoverImage(imagePath);
-
-
-
         observableBookList.add(newbook);
-
+        saveBookInfoToJson(title.getText(), subtitle.getText(), isbn.getText(), authors.getText(), translators.getText(), publisher.getText(), date.getValue().toString(), covertype.getText(), edition.getText(), Integer.parseInt(page.getText()), tags.getText());
         ResetInput();
 
     }

@@ -1,6 +1,7 @@
 package com.example.hellofx1;
 
 
+import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,12 +54,11 @@ public class MainController implements Initializable {
     private Button AddButton;
     @FXML
     private Button searchButton;
-
+    @FXML
+    private Button EditButton;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         bookTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         title.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         subtitle.setCellValueFactory(new PropertyValueFactory<Book,String>("subtitle"));
         isbn.setCellValueFactory(new PropertyValueFactory<Book,String>("isbn"));
@@ -72,10 +72,11 @@ public class MainController implements Initializable {
         date.setCellValueFactory(new PropertyValueFactory<Book,String>("date"));
         coverimage.setCellValueFactory(new PropertyValueFactory<Book,String>("coverImage"));
 
-
         bookTableView.setItems(observableBookList);
 
+
     }
+
     /*/ handle column edits*/
     public void titleCol_OnEdit(Event e){
         TableColumn.CellEditEvent<Book,String> cellEditEvent;
@@ -138,6 +139,20 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
 
+    @FXML
+    public void EditButton() {
+        FXMLLoader add = new FXMLLoader(getClass().getResource("Edit.fxml"));
+        Stage addButton = new Stage();
+        addButton.setTitle("Add");
+        try {
+            addButton.setScene(new Scene(add.load(), 654, 466));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        addButton.setResizable(false);
+
+        addButton.show();
+    }
 
 
 }
