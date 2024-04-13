@@ -9,8 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hellofx1.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hellofx1.SearchController">
     <children>
         <VBox layoutX="-3.0" layoutY="-4.8" prefHeight="593.0" prefWidth="481.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-5.0">
             <children>
@@ -62,13 +63,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="title1" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="isbn" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Translators">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="subtitle1" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="translator" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
                      </children>
                   </AnchorPane>
                </children>
@@ -82,13 +83,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="title11" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="publisher" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Date">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <DatePicker layoutX="357.0" layoutY="16.0" prefHeight="25.0" prefWidth="104.0" />
+                        <DatePicker fx:id="date" layoutX="357.0" layoutY="16.0" prefHeight="25.0" prefWidth="104.0" />
                      </children>
                   </AnchorPane>
                </children>
@@ -102,13 +103,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="title111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="covertype" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Edition">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="subtitle111" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="edition" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
                      </children>
                   </AnchorPane>
                </children>
@@ -122,13 +123,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="title1111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="page" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Tags">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="subtitle1111" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="tags" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
                      </children>
                   </AnchorPane>
                </children>
@@ -137,18 +138,18 @@
                <children>
                   <AnchorPane prefHeight="66.0" prefWidth="475.0">
                      <children>
-                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Rating">
+                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Authors">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="title111111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
-                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Language">
+                        <TextField fx:id="authors" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <Label layoutX="34.0" layoutY="19.0" prefHeight="26.0" prefWidth="82.0" text="Language">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="subtitle111111" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="language" layoutX="128.0" layoutY="19.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
                      </children>
                   </AnchorPane>
                </children>
@@ -157,13 +158,13 @@
                <children>
                   <AnchorPane prefHeight="66.0" prefWidth="475.0">
                      <children>
-                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Authors">
+                              <Button layoutX="357.0" layoutY="17.0" mnemonicParsing="false" onAction="#Show" prefHeight="30.0" prefWidth="104.0" text="Search" />
+                        <Label layoutX="33.0" layoutY="19.0" prefHeight="26.0" prefWidth="82.0" text="Rating">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="title11111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
-                              <Button layoutX="357.0" layoutY="17.0" mnemonicParsing="false" onAction="#Show" prefHeight="30.0" prefWidth="104.0" text="Search" />
+                        <Rating fx:id="rating" layoutX="115.0" layoutY="16.0" prefHeight="32.0" prefWidth="104.0" />
                      </children>
                   </AnchorPane>
                </children>

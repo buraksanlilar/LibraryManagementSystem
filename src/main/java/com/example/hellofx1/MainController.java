@@ -118,7 +118,7 @@ public class MainController implements Initializable {
         Stage searchButton = new Stage();
         searchButton.setTitle("Search");
         try {
-            searchButton.setScene(new Scene(search.load(), 654, 466));
+            searchButton.setScene(new Scene(search.load(), 476, 482));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

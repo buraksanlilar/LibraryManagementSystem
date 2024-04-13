@@ -16,20 +16,9 @@
             <children>
                 <MenuBar prefHeight="25.0" prefWidth="919.0">
                     <menus>
-                        <Menu mnemonicParsing="false" text="File">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                            </items>
-                        </Menu>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
-                                <MenuItem mnemonicParsing="false" text="Surprise me!" />
+                                <MenuItem mnemonicParsing="false" onAction="#helpDisplay" text="About" />
                             </items>
                         </Menu>
                     </menus>

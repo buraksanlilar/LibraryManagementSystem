@@ -3,6 +3,7 @@ package com.example.hellofx1;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import org.controlsfx.control.Rating;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,9 +30,11 @@ public class SearchController {
     @FXML
     private TextField page;
     @FXML
-    private TextField tag;
-
-
+    private TextField tags;
+    @FXML
+    private Rating rating;
+    @FXML
+    private TextField language;
     @FXML
     public ArrayList<Book> searchBooks() {
 
@@ -45,7 +48,7 @@ public class SearchController {
         String coverTypeSearch = covertype.getText().toLowerCase();
         String editionSearch = edition.getText();
         String pageSearch = page.getText();
-        String tagSearch = tag.getText().toLowerCase();
+        String tagSearch = tags.getText().toLowerCase();
 
         ArrayList<Book> results = new ArrayList<>();
         for (Book book : MainController.tempResults) {
@@ -96,7 +99,7 @@ public class SearchController {
         covertype.clear();
         edition.clear();
         page.clear();
-        tag.clear();
+        tags.clear();
     }
 
     @FXML
