@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hellofx1.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hellofx1.SearchController">
     <children>
-        <VBox layoutX="-3.0" layoutY="-4.8" prefHeight="591.0" prefWidth="444.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="-5.0">
+        <VBox layoutX="-3.0" layoutY="-4.8" prefHeight="593.0" prefWidth="481.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-5.0">
             <children>
                 <HBox prefHeight="49.0" prefWidth="416.0">
                     <children>
-                        <AnchorPane prefHeight="50.0" prefWidth="431.0">
+                        <AnchorPane prefHeight="49.0" prefWidth="476.0">
                             <children>
-                                <Label contentDisplay="CENTER" layoutX="122.0" layoutY="9.0" prefHeight="26.0" prefWidth="162.0" text="   Search Books" textAlignment="JUSTIFY">
+                                <Label contentDisplay="CENTER" layoutX="157.0" layoutY="11.0" prefHeight="26.0" prefWidth="162.0" text="   Search Books" textAlignment="JUSTIFY">
                                     <font>
                                         <Font name="Bell MT Bold" size="24.0" />
                                     </font>
@@ -35,7 +35,7 @@
                 </HBox>
                 <HBox>
                     <children>
-                        <AnchorPane prefHeight="94.0" prefWidth="483.0">
+                        <AnchorPane prefHeight="66.0" prefWidth="475.0">
                             <children>
                                 <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Title">
                                     <font>
@@ -53,98 +53,121 @@
                         </AnchorPane>
                     </children>
                 </HBox>
-                <HBox>
-                    <children>
-                        <AnchorPane prefHeight="102.0" prefWidth="487.0">
-                            <children>
-                                <Label layoutX="31.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="ISBN">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="isbn" layoutX="134.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="isbn" />
-                                <Label layoutX="262.0" layoutY="15.0" prefHeight="26.0" prefWidth="65.0" text="Author">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="authors" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="author" />
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </HBox>
-                <HBox prefWidth="438.0">
-                    <children>
-                        <AnchorPane prefHeight="78.0" prefWidth="487.0">
-                            <children>
-                                <Label layoutX="8.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Publisher">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="publisher" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="publisher" />
-                                <Label layoutX="262.0" layoutY="15.0" prefHeight="26.0" prefWidth="55.0" text="Date">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <DatePicker fx:id="date" layoutX="356.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" />
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <AnchorPane prefHeight="102.0" prefWidth="486.0">
-                            <children>
-                                <Label layoutX="7.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Translator">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="translator" layoutX="126.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="translator" />
-                                <Label layoutX="257.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="CoverType">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="covertype" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="covertype" />
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <AnchorPane prefHeight="103.0" prefWidth="483.0">
-                            <children>
-                                <Label layoutX="7.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Page">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="page" layoutX="89.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="page" />
-                                <Label layoutX="260.0" layoutY="15.0" prefHeight="26.0" prefWidth="55.0" text="Edition">
-                                    <font>
-                                        <Font size="17.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="edition" layoutX="342.0" layoutY="15.0" prefHeight="26.0" prefWidth="118.0" promptText="edition" />
-                                <TextField fx:id="tag" layoutX="163.0" layoutY="63.0" />
-                                <Label layoutX="89.0" layoutY="67.0" text="Tag" />
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </HBox>
-                <AnchorPane prefHeight="64.0" prefWidth="428.0">
-                    <children>
-                        <Button layoutX="342.0" layoutY="-2.0" mnemonicParsing="false" onAction="#Show" prefHeight="26.0" prefWidth="82.0" text="Search" />
-                        <ImageView fitHeight="26.0" fitWidth="18.0" layoutX="348.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-
-                            </image>
-                        </ImageView>
-                    </children>
-                </AnchorPane>
+            <HBox layoutX="10.0" layoutY="59.0">
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                     <children>
+                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="ISBN">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="title1" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Translators">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="subtitle1" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="189.0">
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                     <children>
+                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Publisher">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="title11" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Date">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <DatePicker layoutX="357.0" layoutY="16.0" prefHeight="25.0" prefWidth="104.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="255.0">
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                     <children>
+                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Cover">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="title111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Edition">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="subtitle111" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="321.0">
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                     <children>
+                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Page">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="title1111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Tags">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="subtitle1111" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="374.0">
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                     <children>
+                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Rating">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="title111111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Language">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="subtitle111111" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="323.0">
+               <children>
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                     <children>
+                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Authors">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="title11111" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                              <Button layoutX="357.0" layoutY="17.0" mnemonicParsing="false" onAction="#Show" prefHeight="30.0" prefWidth="104.0" text="Search" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>

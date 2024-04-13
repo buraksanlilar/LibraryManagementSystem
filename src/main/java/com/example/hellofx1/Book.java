@@ -9,7 +9,7 @@ public class Book {
     public String isbn;
     public String publisher;
     public String date;
-    public String coverType;
+    public String cover;
     public String edition;
     public int page;
     public String coverImage;
@@ -92,11 +92,11 @@ public class Book {
     }
 
     public String getCovertype() {
-        return coverType;
+        return cover;
     }
 
     public void setCovertype(String coverType) {
-        this.coverType = coverType;
+        this.cover = coverType;
     }
 
     public String getEdition() {

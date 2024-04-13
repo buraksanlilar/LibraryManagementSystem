@@ -5,11 +5,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
-
+import javafx.scene.image.Image;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,8 +45,6 @@ public class AddController {
     @FXML
     private TextField page;
     @FXML
-    private TextField image;
-    @FXML
     private TextField tag;
     @FXML
     private Button resetButton;
@@ -64,9 +63,18 @@ public class AddController {
     public void addImage(){
         String imagesDirectory = "MyLibrary/images/";
         File imagesDir = new File(imagesDirectory);
+
         if (!imagesDir.exists()) {
-            imagesDir.mkdir();
+            try {
+                imagesDir.mkdirs();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error creating images directory.", ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
         }
+
         FileChooser fc = new FileChooser();
         fc.setTitle("Choose an image");
 
@@ -76,7 +84,6 @@ public class AddController {
         Stage stage = (Stage) imageButton.getScene().getWindow();
         File file = fc.showOpenDialog(stage);
 
-
         if(file != null){
             String imageName = file.getName();
             String targetPath = imagesDirectory + imageName;
@@ -84,6 +91,9 @@ public class AddController {
                 Files.copy(file.toPath(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error copying image file.", ButtonType.OK);
+                alert.showAndWait();
+                return;
             }
             imagePath = targetPath;
         }

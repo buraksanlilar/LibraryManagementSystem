@@ -60,17 +60,17 @@
                                                     <columns>
                                                         <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
                                                         <TableColumn fx:id="subtitle" prefWidth="75.0" text="Subtitle" />
-                                                        <TableColumn fx:id="isbn" prefWidth="71.0" text="ISBN" />
-                                                        <TableColumn fx:id="page" prefWidth="70.0" text="Page" />
-                                                        <TableColumn fx:id="authors" prefWidth="82.0" text="Authors" />
-                                                        <TableColumn fx:id="translators" prefWidth="99.0" text="Translators" />
-                                                        <TableColumn fx:id="publisher" prefWidth="102.0" text="Publisher" />
-                                                        <TableColumn fx:id="covertype" prefWidth="101.0" text="Cover type" />
-                                                        <TableColumn fx:id="edition" prefWidth="76.0" text="Edition" />
-                                                        <TableColumn fx:id="tags" prefWidth="64.0" text="Tags" />
-                                                        <TableColumn fx:id="date" prefWidth="47.0" text="Date" />
-                                          <TableColumn fx:id="language" prefWidth="56.0" text="Language" />
-                                          <TableColumn fx:id="rating" prefWidth="58.0" text="Rating" />
+                                                        <TableColumn fx:id="isbn" prefWidth="100.0" text="ISBN" />
+                                                        <TableColumn fx:id="page" prefWidth="41.0" text="Page" />
+                                                        <TableColumn fx:id="authors" prefWidth="105.0" text="Authors" />
+                                                        <TableColumn fx:id="translators" prefWidth="118.0" text="Translators" />
+                                                        <TableColumn fx:id="publisher" text="Publisher" />
+                                                        <TableColumn fx:id="covertype" prefWidth="73.0" text="Cover type" />
+                                                        <TableColumn fx:id="edition" prefWidth="48.0" text="Edition" />
+                                                        <TableColumn fx:id="tags" prefWidth="84.0" text="Tags" />
+                                                        <TableColumn fx:id="date" prefWidth="66.0" text="Date" />
+                                          <TableColumn fx:id="language" prefWidth="66.0" text="Language" />
+                                          <TableColumn fx:id="rating" prefWidth="45.0" text="Rating" />
                                                     </columns>
                                                 </TableView>
                                             </children>
