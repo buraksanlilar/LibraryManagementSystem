@@ -151,10 +151,13 @@ public class AddController {
         bookJson.addProperty("covertype", book.getCovertype());
         bookJson.addProperty("edition", book.getEdition());
         bookJson.addProperty("page", book.getPage());
-        bookJson.addProperty("tags", book.getTags());
+        bookJson.addProperty("tag", book.getTags());
+        bookJson.addProperty("coverImage", book.getCoverImage());
+        bookJson.addProperty("rating", book.getRating());
+        bookJson.addProperty("language", book.getLanguage());
 
 
-        String folderPath = "books";
+        String folderPath = "MyLibrary/books/";
         File folder = new File(folderPath);
         if (!folder.exists()) {
             folder.mkdirs();
@@ -177,7 +180,7 @@ public class AddController {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String jsonString = gson.toJson(bookJson);
             fileWriter.write(jsonString);
-            System.out.println("JSON OLUSTU.");
+            System.out.println("Done");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -203,7 +206,7 @@ public class AddController {
     public boolean checkNull(){
         if(title.getText().isEmpty() && subtitle.getText().isEmpty() && isbn.getText().isEmpty() &&
                 authors.getText().isEmpty() && translators.getText().isEmpty() && publisher.getText().isEmpty() && edition.getText().isEmpty() &&
-                page.getText().isEmpty() && tag.getText().isEmpty() && covertype.getText().isEmpty() ){
+                page.getText().isEmpty() && tag.getText().isEmpty() && covertype.getText().isEmpty() && language.getText().isEmpty()){
             return true;
         }
         return false;

@@ -63,7 +63,7 @@ public class MainController implements Initializable {
 
     public void loadBooksFromJson() {
         try {
-            File folder = new File("books");
+            File folder = new File("Mylibrary/books/");
             File[] listOfFiles = folder.listFiles();
 
             if (listOfFiles != null) {
@@ -154,7 +154,8 @@ public class MainController implements Initializable {
 
     public void deleteSelectedBook(Book selectedBook) {
 
-        String folderPath = "books";
+        String folderPath = "Mylibrary/books/";
+        String imagePath = selectedBook.getCoverImage(); // Kitaba ait resmin yolu
 
         String filePath = folderPath + File.separator + selectedBook.getTitle() + ".json";
         File file = new File(filePath);
@@ -162,16 +163,30 @@ public class MainController implements Initializable {
         if (file.exists()) {
             if (file.delete()) {
                 System.out.println(filePath + " başarıyla silindi.");
+
+                // Resmi de sil
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    File imageFile = new File(imagePath);
+                    if (imageFile.exists()) {
+                        if (imageFile.delete()) {
+                            System.out.println(imagePath + " başarıyla silindi.");
+                        } else {
+                            System.out.println(imagePath + " silinemedi.");
+                        }
+                    } else {
+                        System.out.println("Belirtilen resim dosyası bulunamadı.");
+                    }
+                }
+
             } else {
                 System.out.println(filePath + " silinemedi.");
             }
         } else {
             System.out.println("Belirtilen JSON dosya bulunamadı.");
         }
-
-
-
     }
+
+
 
 
 
