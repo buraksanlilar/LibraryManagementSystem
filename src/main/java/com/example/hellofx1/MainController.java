@@ -1,6 +1,7 @@
 package com.example.hellofx1;
 
 
+import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,18 +49,21 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Book,String> coverimage;
 
+
+
+
     public static ObservableList<Book> observableBookList = FXCollections.observableArrayList();
 
     @FXML
     private Button AddButton;
     @FXML
     private Button searchButton;
-
+    @FXML
+    private Button EditButton;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         bookTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         title.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
         subtitle.setCellValueFactory(new PropertyValueFactory<Book,String>("subtitle"));
         isbn.setCellValueFactory(new PropertyValueFactory<Book,String>("isbn"));
@@ -73,22 +77,44 @@ public class MainController implements Initializable {
         date.setCellValueFactory(new PropertyValueFactory<Book,String>("date"));
         coverimage.setCellValueFactory(new PropertyValueFactory<Book,String>("coverImage"));
 
-        title.setCellFactory(TextFieldTableCell.forTableColumn());
-        subtitle.setCellFactory(TextFieldTableCell.forTableColumn());
-        isbn.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        title.setCellFactory(TextFieldTableCell.forTableColumn());
-        title.setCellFactory(TextFieldTableCell.forTableColumn());
-        title.setCellFactory(TextFieldTableCell.forTableColumn());
-        title.setCellFactory(TextFieldTableCell.forTableColumn());
-        title.setCellFactory(TextFieldTableCell.forTableColumn());
-        title.setCellFactory(TextFieldTableCell.forTableColumn());
-
+        loadBooksFromJson();
 
         bookTableView.setItems(observableBookList);
         bookTableView.setEditable(true);
 
+
+
+
     }
+    public void loadBooksFromJson() {
+        try {
+            File folder = new File("books");
+            File[] listOfFiles = folder.listFiles();
+
+            if (listOfFiles != null) {
+                for (File file : listOfFiles) {
+                    if (file.isFile() && file.getName().endsWith(".json")) {
+                        System.out.println("Reading file: " + file.getAbsolutePath()); // Debug
+                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                            Gson gson = new Gson();
+                            Book book = gson.fromJson(br, Book.class);
+                            observableBookList.add(book);
+                        } catch (IOException e) {
+                            System.err.println("Error reading file: " + file.getAbsolutePath()); // Debug
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("Unexpected error: " + ex.getMessage()); // Debug
+            ex.printStackTrace();
+        }
+    }
+
+
+
+
     /*/ handle column edits*/
     public void titleCol_OnEdit(Event e){
         TableColumn.CellEditEvent<Book,String> cellEditEvent;
@@ -151,6 +177,20 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
 
+    @FXML
+    public void EditButton() {
+        FXMLLoader add = new FXMLLoader(getClass().getResource("Edit.fxml"));
+        Stage addButton = new Stage();
+        addButton.setTitle("Add");
+        try {
+            addButton.setScene(new Scene(add.load(), 654, 466));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        addButton.setResizable(false);
+
+        addButton.show();
+    }
 
 
 }
