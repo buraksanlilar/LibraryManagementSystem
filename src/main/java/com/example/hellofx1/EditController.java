@@ -92,10 +92,10 @@ public class EditController {
         bookJson.addProperty("translators", translators);
         bookJson.addProperty("publisher", publisher);
         bookJson.addProperty("date", date);
-        bookJson.addProperty("covertype", covertype);
+        bookJson.addProperty("cover", covertype);
         bookJson.addProperty("edition", edition);
         bookJson.addProperty("page", page);
-        bookJson.addProperty("tags", tags);
+        bookJson.addProperty("tag", tags);
         String folderPath = "books";
         String filePath = folderPath + File.separator + title + ".json";
         try (FileWriter file = new FileWriter(filePath)) {
