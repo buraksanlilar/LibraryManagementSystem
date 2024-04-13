@@ -1,7 +1,5 @@
 package com.example.hellofx1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Book {
     public String title;
@@ -16,6 +14,27 @@ public class Book {
     public int page;
     public String coverImage;
     public String tags;
+    public String language;
+    public double rating;
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+
+
     public String getTitle() {
         return title;
     }

@@ -70,8 +70,8 @@ public class EditController {
         title.setText(book.getTitle());
         subtitle.setText(book.getSubtitle());
         isbn.setText(book.getIsbn());
-        authors.setText(book.getAuthors());
-        translators.setText(book.getTranslators());
+        authors.setText(String.valueOf(book.getAuthors()));
+        translators.setText(String.valueOf(book.getTranslators()));
         publisher.setText(book.getPublisher());
         if (book.getDate() != null) {
             date.setValue(LocalDate.parse(book.getDate()));
@@ -80,7 +80,7 @@ public class EditController {
         covertype.setText(book.getCovertype());
         edition.setText(book.getEdition());
         page.setText(String.valueOf(book.getPage()));
-        tags.setText(book.getTags());
+        tags.setText(String.valueOf(book.getTags()));
     }
     public void saveBookInfoToJson(String title, String subtitle, String isbn, String authors, String translators, String publisher, String date,
                                    String covertype, String edition, int page, String tags) {

@@ -3,6 +3,7 @@ package com.example.hellofx1;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,12 +30,11 @@ public class SearchController {
     private TextField page;
     @FXML
     private TextField tag;
-    public static boolean control = true;
 
 
-
-
+    @FXML
     public ArrayList<Book> searchBooks() {
+
         String titleSearch = title.getText().toLowerCase();
         String subtitleSearch = subtitle.getText().toLowerCase();
         String isbnSearch = isbn.getText();
@@ -48,39 +48,61 @@ public class SearchController {
         String tagSearch = tag.getText().toLowerCase();
 
         ArrayList<Book> results = new ArrayList<>();
+        for (Book book : MainController.tempResults) {
 
-
-
-        String newString = tagSearch.replaceAll("\\s+","");
-        String[] stringArr = tagSearch.split(",");
-        new ArrayList<>(Arrays.asList(stringArr));
-
-
-        for (Book book : MainController.observableBookList) {
-            if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
-                    (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
-                    (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&
-                    (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
-                    (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
-                    (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
-                    (dateSearch.isEmpty() || book.getDate().equals(dateSearch)) &&
-                    (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains( coverTypeSearch)) &&
-                    (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
-                    (pageSearch.isEmpty() || book.getPage() == Integer.parseInt((pageSearch))) &&
-                    (tagSearch.isEmpty() || book.getTags().contains(tagSearch))) {
-                results.add(book);
+            //  MainController.observableBookList.setAll(MainController.tempResults);
+            if (date.getValue() == null) {
+                if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
+                        (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
+                        (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&
+                        (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
+                        (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
+                        (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
+                        (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains(coverTypeSearch)) &&
+                        (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
+                        (pageSearch.isEmpty() || book.getPage() == Integer.parseInt(pageSearch)) &&
+                        (tagSearch.isEmpty() || book.getTags().contains(tagSearch))) {
+                    results.add(book);
+                }
             }
-
+            {
+                if (
+                        (titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
+                                (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
+                                (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&
+                                (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
+                                (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
+                                (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
+                                (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains(coverTypeSearch)) &&
+                                (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
+                                (pageSearch.isEmpty() || book.getPage() == Integer.parseInt(pageSearch)) &&
+                                (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) && (dateSearch.isEmpty() || book.getDate().contains(dateSearch))) {
+                    results.add(book);
+                }
+            }
         }
-
+        reset();
         return results;
     }
 
-    public void Show(){
+    public void reset() {
+        title.clear();
+        subtitle.clear();
+        isbn.clear();
+        authors.clear();
+        translator.clear();
+        publisher.clear();
+        date.setValue(null);
+        covertype.clear();
+        edition.clear();
+        page.clear();
+        tag.clear();
+    }
 
+    @FXML
+
+    public void Show() {
         ArrayList<Book> searchResults = searchBooks();
-
-
         MainController.observableBookList.setAll(searchResults);
     }
 }
