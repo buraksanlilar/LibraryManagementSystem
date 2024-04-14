@@ -32,7 +32,7 @@
                                     <children>
                                         <Button fx:id="AddButton" layoutX="30.0" layoutY="44.0" mnemonicParsing="false" onAction="#AddButton" prefHeight="40.0" prefWidth="87.0" text="Add" />
                                         <Button layoutX="30.0" layoutY="107.0" mnemonicParsing="false" onAction="#DeleteButton" prefHeight="40.0" prefWidth="87.0" text="Delete" />
-                                        <Button layoutX="30.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="87.0" text="Edit" />
+                                        <Button layoutX="30.0" layoutY="169.0" mnemonicParsing="false" onAction="#editButton" prefHeight="40.0" prefWidth="87.0" text="Edit" />
                                         <Button fx:id="searchButton" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#SearchButton" prefHeight="40.0" prefWidth="87.0" text="Search" />
                                         <Button fx:id="UpdateButton" layoutX="29.0" layoutY="294.0" mnemonicParsing="false" onAction="#UpdateButton" prefHeight="40.0" prefWidth="87.0" text="Update" />
                                     </children>

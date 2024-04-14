@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -203,6 +204,24 @@ public class MainController implements Initializable {
         addButton.setResizable(false);
 
         addButton.show();
+    }
+    @FXML
+    public void editButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit.fxml"));
+        Parent root = loader.load();
+
+        Book editbook = bookTableView.getSelectionModel().getSelectedItem();
+        EditController editController = loader.getController();
+        editController.showInformation(editbook);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Edit Book");
+        stage.show();
+
+
+
+
     }
 
     @FXML
