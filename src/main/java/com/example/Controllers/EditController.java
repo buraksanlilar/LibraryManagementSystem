@@ -1,4 +1,4 @@
-package com.example.hellofx1;
+package com.example.Controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
@@ -19,12 +18,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 
-import static com.example.hellofx1.MainController.observableBookList;
-import static com.example.hellofx1.MainController.tempResults;
+import static com.example.Controllers.MainController.observableBookList;
+import static com.example.Controllers.MainController.tempResults;
 
 public class EditController {
 
-    private Book bookToEdit; // Düzenlenmek istenen kitap
+    private Book bookToEdit;
 
     @FXML
     private TextField title;
@@ -74,21 +73,20 @@ public class EditController {
     private String tempIsbn;
     @FXML
     public void editImage(){
-// Resim seçme işlemi
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Resim Seç");
 
-        // Sadece resim dosyalarını filtrele
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Resim Dosyaları", "*.png", "*.jpg", "*.jpeg");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose an Image");
+
+
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
 
-        // Seçilen resmi al
+
         Stage stage = (Stage) imageButton.getScene().getWindow();
         imageFile = fileChooser.showOpenDialog(stage);
 
-        // Seçilen resmi göster
+
         if (imageFile != null) {
-            // Seçilen resmi yükle ve ImageView'da göster
             Image image = new Image(imageFile.toURI().toString());
             imageView.setImage(image);
         }
@@ -100,10 +98,10 @@ public class EditController {
             File imageFile = new File(imagePath);
             if (imageFile.exists()) {
                 if (imageFile.delete()) {
-                    System.out.println(imagePath + " başarıyla silindi.");
+                    System.out.println(imagePath + " succesfully deleted.");
                 }
-            }}
-
+            }
+        }
 
                 String imagesDirectory = "MyLibrary/images/";
                 File imagesDir = new File(imagesDirectory);
@@ -195,10 +193,10 @@ public class EditController {
 
         addImage();
 
-        // Mevcut JSON dosyasını güncelle
+
         updateJsonFile(bookToEdit);
 
-        // İlgili listeleri güncelle
+
         int index = tempResults.indexOf(bookToEdit);
         if (index != -1) {
             tempResults.set(index, bookToEdit);
@@ -208,7 +206,7 @@ public class EditController {
             observableBookList.set(index, bookToEdit);
         }
 
-        System.out.println("Kitap güncellendi.");
+        System.out.println("Book is updated");
 
 
     }
@@ -225,12 +223,12 @@ public class EditController {
         if (!tempIsbn.equals(bookToEdit.getIsbn())) {
             if (oldFile.exists()) {
                 if (oldFile.delete()) {
-                    System.out.println("Eski dosya silindi.");
+                    System.out.println("Old file deleted");
                 } else {
-                    System.out.println("Eski dosya silinemedi.");
+                    System.out.println("Old file cannot deleted.");
                 }
             } else {
-                System.out.println("Eski dosya bulunamadı: " + oldFilePath);
+                System.out.println("Cannot find old file: " + oldFilePath);
             }
         }
 
@@ -253,11 +251,11 @@ public class EditController {
         bookJson.addProperty("language", bookToEdit.getLanguage());
         bookJson.addProperty("coverImage", bookToEdit.getCoverImage());
 
-        // Yeni JSON dosyasını oluştur
+
         try (FileWriter fileWriter = new FileWriter(newFile)) {
             String jsonString = gson.toJson(bookJson);
             fileWriter.write(jsonString);
-            System.out.println("Yeni JSON dosyası oluşturuldu.");
+            System.out.println("New JSON File created.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -273,20 +271,11 @@ public class EditController {
         publisher.clear();
         edition.clear();
         page.clear();
-        // image.clear();
         tags.clear();
         covertype.clear();
         date.setValue(null);
         language.clear();
         rating.setRating(0);
-    }
-    public boolean checkNull(){
-        if(title.getText().isEmpty() && subtitle.getText().isEmpty() && isbn.getText().isEmpty() &&
-                authors.getText().isEmpty() && translators.getText().isEmpty() && publisher.getText().isEmpty() && edition.getText().isEmpty() &&
-                page.getText().isEmpty() && tags.getText().isEmpty() && covertype.getText().isEmpty() && language.getText().isEmpty() && rating.getRating() == 0 && language.getText().isEmpty() ){
-            return true;
-        }
-        return false;
     }
 
 }

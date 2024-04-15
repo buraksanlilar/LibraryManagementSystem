@@ -1,4 +1,4 @@
-package com.example.hellofx1;
+package com.example.Controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,8 +19,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 
-import static com.example.hellofx1.MainController.observableBookList;
-import static com.example.hellofx1.MainController.tempResults;
+import static com.example.Controllers.MainController.observableBookList;
+import static com.example.Controllers.MainController.tempResults;
 
 
 public class AddController {
@@ -65,21 +65,20 @@ public class AddController {
 
     @FXML
     public void selectImage(){
-        // Resim seçme işlemi
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Resim Seç");
 
-        // Sadece resim dosyalarını filtrele
+
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Resim Dosyaları", "*.png", "*.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
 
-        // Seçilen resmi al
+
         Stage stage = (Stage) imageButton.getScene().getWindow();
         imageFile = fileChooser.showOpenDialog(stage);
 
-        // Seçilen resmi göster
+
         if (imageFile != null) {
-            // Seçilen resmi yükle ve ImageView'da göster
             Image image = new Image(imageFile.toURI().toString());
             imageView.setImage(image);
         }
@@ -113,8 +112,6 @@ public class AddController {
             }
             imagePath = targetPath;
         }
-
-
     }
 
 
@@ -123,7 +120,7 @@ public class AddController {
         Book newbook = new Book();
         if(checkNull() ){
             Alert nullAlert = new Alert(Alert.AlertType.INFORMATION,"Back",ButtonType.CANCEL);
-            nullAlert.setContentText("Please review information that you have entered");
+            nullAlert.setContentText("Please review information that you have entered /n You must have to enter isbn number ");
             nullAlert.initModality(Modality.WINDOW_MODAL);
             nullAlert.showAndWait();
             return;
@@ -159,7 +156,6 @@ public class AddController {
         newbook.setCoverImage(imagePath);
 
 
-        //  observableBookList.clear();
         tempResults.add(newbook);
         observableBookList.add(newbook);
         saveBookInfoToJson(newbook);
@@ -197,7 +193,6 @@ public class AddController {
 
         int count = 1;
         while (file.exists()) {
-            // aynı ad varsa arttırıor.
             String uniqueFileName = baseFileName + "-" + count;
             filePath = folderPath + File.separator + uniqueFileName + ".json";
             file = new File(filePath);
@@ -224,7 +219,6 @@ public class AddController {
         publisher.clear();
         edition.clear();
         page.clear();
-        // image.clear();
         tag.clear();
         covertype.clear();
         date.setValue(null);
@@ -243,7 +237,6 @@ public class AddController {
     }
 
     public void close() {
-        // Close the window
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }

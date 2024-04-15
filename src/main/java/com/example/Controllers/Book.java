@@ -1,7 +1,5 @@
-package com.example.hellofx1;
+package com.example.Controllers;
 
-
-import java.util.Random;
 
 public class Book {
     public String title;
@@ -18,19 +16,11 @@ public class Book {
     public String tags;
     public String language;
     public double rating;
-    public int randomID;
 
     public double getRating() {
         return rating;
     }
 
-    public int getRandomID() {
-        return randomID;
-    }
-
-    public void setRandomID(int randomID) {
-        this.randomID = randomID;
-    }
 
     public void setRating(double rating) {
         this.rating = rating;
@@ -43,8 +33,6 @@ public class Book {
     public void setLanguage(String language) {
         this.language = language;
     }
-
-
 
     public String getTitle() {
         return title;
@@ -143,8 +131,6 @@ public class Book {
     }
 
     public Book(){
-        Random random = new Random();
-
     }
 
 }

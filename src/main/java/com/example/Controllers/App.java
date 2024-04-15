@@ -1,4 +1,4 @@
-package com.example.hellofx1;
+package com.example.Controllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +14,12 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         stage.setTitle("FXMLLoader Example");
         stage.setScene(new Scene(fxmlLoader.load(), 1141, 653));
         stage.show();
+        stage.setResizable(false);
 
-//er
 
     }
 }

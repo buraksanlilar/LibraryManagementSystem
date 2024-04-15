@@ -5,6 +5,6 @@ module com.example.hellofx {
     requires org.controlsfx.controls;
 
 
-    opens com.example.hellofx1 to javafx.fxml;
-    exports com.example.hellofx1;
+    opens com.example.Controllers to javafx.fxml;
+    exports com.example.Controllers;
 }

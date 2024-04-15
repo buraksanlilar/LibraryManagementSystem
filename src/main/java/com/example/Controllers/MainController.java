@@ -1,4 +1,4 @@
-package com.example.hellofx1;
+package com.example.Controllers;
 
 
 import com.google.gson.Gson;
@@ -157,7 +157,7 @@ public class MainController implements Initializable {
         String folderPath = "Mylibrary/books";
 
         String filePath = folderPath + "/" + selectedBook.getIsbn() + ".json";
-        String imagePath = selectedBook.getCoverImage(); // Kitaba ait resmin yolu
+        String imagePath = selectedBook.getCoverImage();
 
         File file = new File(filePath);
 
@@ -165,7 +165,7 @@ public class MainController implements Initializable {
             if (file.delete()) {
                 System.out.println(filePath + " başarıyla silindi.");
 
-                // Resmi de sil
+
                 if (imagePath != null && !imagePath.isEmpty()) {
                     File imageFile = new File(imagePath);
                     if (imageFile.exists()) {
@@ -224,17 +224,21 @@ public class MainController implements Initializable {
     @FXML
     public void helpDisplay() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information !!!");
-        alert.setHeaderText("about 2024");
+        alert.setTitle("Welcome to the Library Management System");
+        alert.setHeaderText("Library Management System User Guide");
+        alert.setContentText("Add Book: Use the \"Add\" function to input details for a new book and store it in the system.\n" +
+                "Delete Book: Choose a book or books and select \"Delete\" to remove it from the library.\n" +
+                "Edit Book: Update book details by selecting the book to \"Edit\" information.\n" +
+                "Search for Book: Utilize search functionality to locate books based on title, author,ISBN or etc.\n" +
+                "Update: After searching, return to the list where you have started.\n"+
+                "Do not worry all the information of books are stored in the program");
+
         alert.showAndWait();
     }
 
     public void UpdateButton() {
         observableBookList.clear();
         observableBookList.addAll(tempResults);
-        //   bookTableView.setItems(observableBookList);
-
-
     }
 
 

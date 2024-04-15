@@ -1,4 +1,4 @@
-package com.example.hellofx1;
+package com.example.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.Rating;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SearchController {
     @FXML
@@ -55,7 +54,6 @@ public class SearchController {
         ArrayList<Book> results = new ArrayList<>();
         for (Book book : MainController.tempResults) {
 
-            //  MainController.observableBookList.setAll(MainController.tempResults);
             if (date.getValue() == null) {
                 if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
                         (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
