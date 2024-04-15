@@ -103,9 +103,9 @@ public class AddController {
     @FXML
     public void AddNewBook(){
         Book newbook = new Book();
-        if(checkNull()){
+        if(checkNull() ){
             Alert nullAlert = new Alert(Alert.AlertType.INFORMATION,"Back",ButtonType.CANCEL);
-            nullAlert.setContentText("There is no input so you can not add something");
+            nullAlert.setContentText("Please review information that you have entered");
             nullAlert.initModality(Modality.WINDOW_MODAL);
             nullAlert.showAndWait();
             return;
@@ -173,7 +173,7 @@ public class AddController {
             folder.mkdirs();
         }
 
-        String baseFileName = book.getTitle();
+        String baseFileName = book.getIsbn();
         String filePath = folderPath + File.separator + baseFileName + ".json";
         File file = new File(filePath);
 
@@ -216,7 +216,9 @@ public class AddController {
     public boolean checkNull(){
         if(title.getText().isEmpty() && subtitle.getText().isEmpty() && isbn.getText().isEmpty() &&
                 authors.getText().isEmpty() && translators.getText().isEmpty() && publisher.getText().isEmpty() && edition.getText().isEmpty() &&
-                page.getText().isEmpty() && tag.getText().isEmpty() && covertype.getText().isEmpty() && language.getText().isEmpty()){
+                page.getText().isEmpty() && tag.getText().isEmpty() && covertype.getText().isEmpty() && language.getText().isEmpty() && bookRating.getRating() == 0 && language.getText().isEmpty() ){
+            return true;
+        } if(isbn.getText().isEmpty()){
             return true;
         }
         return false;

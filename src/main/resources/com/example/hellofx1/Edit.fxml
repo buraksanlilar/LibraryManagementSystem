@@ -6,16 +6,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hellofx1.EditController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hellofx1.EditController">
     <content>
-        <AnchorPane prefHeight="450.0" prefWidth="632.0">
+        <AnchorPane prefHeight="723.0" prefWidth="650.0">
             <children>
-                <HBox layoutX="4.0" layoutY="48.8" prefHeight="404.0" prefWidth="642.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="49.0">
+                <HBox prefHeight="35.0" prefWidth="644.0">
+                    <children>
+                        <AnchorPane prefHeight="39.0" prefWidth="642.0">
+                            <children>
+                                <Label alignment="CENTER" layoutX="226.0" layoutY="9.0" prefHeight="28.0" prefWidth="182.0" text="Edit Book">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <HBox layoutX="-1.0" layoutY="49.0" prefHeight="192.0" prefWidth="648.0">
+                    <children>
+                        <AnchorPane prefHeight="218.0" prefWidth="654.0">
+                            <children>
+                                <ImageView fx:id="image" fitHeight="192.0" fitWidth="200.0" layoutX="224.0" pickOnBounds="true" preserveRatio="true" />
+                                <Label layoutX="136.0" layoutY="87.0" prefHeight="18.0" prefWidth="77.0" text="Cover Image" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <HBox layoutX="6.0" layoutY="253.0" prefHeight="456.0" prefWidth="645.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="253.0">
                     <children>
                         <AnchorPane prefHeight="394.0" prefWidth="305.0">
                             <children>
@@ -88,67 +113,45 @@
                                                 </AnchorPane>
                                             </children>
                                         </HBox>
+                                        <HBox layoutX="10.0" layoutY="309.0">
+                                            <children>
+                                                <AnchorPane prefHeight="62.0" prefWidth="306.0">
+                                                    <children>
+                                                        <Label layoutX="53.0" layoutY="21.0" prefHeight="18.0" prefWidth="61.0" text="Language" />
+                                                        <TextField fx:id="language" layoutX="124.0" layoutY="17.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                            </children>
+                                        </HBox>
                                     </children>
                                 </VBox>
                             </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="405.0" prefWidth="294.0">
+                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="418.0" prefWidth="306.0">
                             <children>
-                                <VBox layoutY="-9.0" prefHeight="413.0" prefWidth="306.0">
+                                <VBox layoutY="7.0" prefHeight="401.0" prefWidth="306.0">
                                     <children>
                                         <HBox prefHeight="63.0" prefWidth="504.0">
                                             <children>
+                                                <AnchorPane prefHeight="45.0" prefWidth="298.0">
+                                                    <children>
+                                                        <Label layoutX="72.0" layoutY="19.0" prefHeight="18.0" prefWidth="61.0" text="Date" />
+                                                        <DatePicker fx:id="date" layoutX="133.0" layoutY="15.0" prefHeight="26.0" prefWidth="165.0" />
+                                                    </children>
+                                                </AnchorPane>
                                                 <HBox prefHeight="55.0" prefWidth="323.0">
                                                     <HBox.margin>
                                                         <Insets bottom="10.0" />
                                                     </HBox.margin>
-                                                    <children>
-                                                        <AnchorPane prefHeight="55.0" prefWidth="298.0">
-                                                            <children>
-                                                                <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Date" />
-                                                                <DatePicker fx:id="date" layoutX="140.0" layoutY="24.0" prefHeight="26.0" prefWidth="150.0" />
-                                                            </children>
-                                                        </AnchorPane>
-                                                    </children>
                                                 </HBox>
                                             </children>
                                         </HBox>
                                         <HBox prefHeight="58.0" prefWidth="321.0">
                                             <children>
-                                                <AnchorPane prefHeight="55.0" prefWidth="313.0">
+                                                <AnchorPane prefHeight="57.0" prefWidth="307.0">
                                                     <children>
-                                                        <Label layoutX="39.0" layoutY="28.0" prefHeight="18.0" prefWidth="69.0" text="Cover Type" />
-                                                        <TextField fx:id="covertype" layoutX="142.0" layoutY="24.0" />
-                                                    </children>
-                                                </AnchorPane>
-                                            </children>
-                                        </HBox>
-                                        <HBox>
-                                            <children>
-                                                <AnchorPane prefHeight="58.0" prefWidth="320.0">
-                                                    <children>
-                                                        <Label contentDisplay="CENTER" layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Edition" />
-                                                        <TextField fx:id="edition" layoutX="142.0" layoutY="24.0" />
-                                                    </children>
-                                                </AnchorPane>
-                                            </children>
-                                        </HBox>
-                                        <HBox>
-                                            <children>
-                                                <AnchorPane prefHeight="62.0" prefWidth="358.0">
-                                                    <children>
-                                                        <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="PageNo" />
-                                                        <TextField fx:id="page" layoutX="142.0" layoutY="24.0" />
-                                                    </children>
-                                                </AnchorPane>
-                                            </children>
-                                        </HBox>
-                                        <HBox>
-                                            <children>
-                                                <AnchorPane prefHeight="58.0" prefWidth="311.0">
-                                                    <children>
-                                                        <Label layoutX="40.0" layoutY="28.0" prefHeight="18.0" prefWidth="77.0" text="Cover Image" />
-                                                        <Button layoutX="179.0" layoutY="22.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" />
+                                                        <Label layoutX="57.0" layoutY="20.0" text="Cover Type" />
+                                                        <TextField fx:id="covertype" layoutX="136.0" layoutY="16.0" />
                                                     </children>
                                                 </AnchorPane>
                                             </children>
@@ -157,42 +160,55 @@
                                             <children>
                                                 <AnchorPane prefHeight="57.0" prefWidth="307.0">
                                                     <children>
-                                                        <Label layoutX="70.0" layoutY="20.0" text="Tags" />
-                                                        <TextField fx:id="tag" layoutX="142.0" layoutY="16.0" />
+                                                        <Label layoutX="70.0" layoutY="20.0" text="Edition" />
+                                                        <TextField fx:id="edition" layoutX="136.0" layoutY="16.0" />
                                                     </children>
                                                 </AnchorPane>
                                             </children></HBox>
-                                        <HBox prefHeight="0.0" prefWidth="306.0">
+                                        <HBox layoutX="10.0" layoutY="309.0" prefHeight="67.0" prefWidth="306.0">
                                             <children>
-                                                <AnchorPane prefHeight="63.0" prefWidth="306.0">
+                                                <AnchorPane prefHeight="57.0" prefWidth="307.0">
                                                     <children>
+                                                        <Label layoutX="70.0" layoutY="20.0" text="PageNo" />
+                                                        <TextField fx:id="page" layoutX="136.0" layoutY="16.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                            </children>
+                                        </HBox>
+                                        <HBox layoutX="10.0" layoutY="256.0" prefHeight="67.0" prefWidth="306.0">
+                                            <children>
+                                                <AnchorPane prefHeight="57.0" prefWidth="307.0">
+                                                    <children>
+                                                        <Label layoutX="70.0" layoutY="20.0" text="Tags" />
+                                                        <TextField fx:id="tags" layoutX="136.0" layoutY="16.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                            </children>
+                                        </HBox>
+                                        <HBox layoutX="10.0" layoutY="356.0" prefHeight="67.0" prefWidth="306.0">
+                                            <children>
+                                                <AnchorPane prefHeight="57.0" prefWidth="307.0">
+                                                    <children>
+                                                        <Label layoutX="70.0" layoutY="20.0" text="Rating" />
+                                                        <Rating fx:id="rating" layoutX="122.0" layoutY="11.0" prefHeight="33.0" prefWidth="212.0" />
 
                                                     </children>
                                                 </AnchorPane>
                                             </children>
                                         </HBox>
-                                        <AnchorPane prefHeight="46.0" prefWidth="306.0">
+                                        <HBox prefHeight="0.0" prefWidth="306.0" />
+                                        <HBox layoutX="10.0" layoutY="332.0" prefHeight="67.0" prefWidth="306.0">
                                             <children>
-                                                <Button layoutX="255.0" layoutY="11.0" mnemonicParsing="false" text="Close" />
-                                                <Button layoutX="127.0" layoutY="10.0" mnemonicParsing="false" onAction="#resetInput" prefHeight="26.0" prefWidth="51.0" text="Reset" />
-                                                <Button layoutX="196.0" layoutY="11.0" mnemonicParsing="false" text="Button" />
+                                                <AnchorPane prefHeight="57.0" prefWidth="307.0">
+                                                    <children>
+                                                        <Button layoutX="166.0" layoutY="18.0" mnemonicParsing="false" onAction="#confirmChanges" prefHeight="26.0" prefWidth="60.0" text="Confirm" />
+                                                        <Button layoutX="232.0" layoutY="18.0" mnemonicParsing="false" onAction="#ResetInput" prefHeight="25.0" prefWidth="54.0" text="Reset" />
+                                                    </children>
+                                                </AnchorPane>
                                             </children>
-                                        </AnchorPane>
+                                        </HBox>
                                     </children>
                                 </VBox>
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </HBox>
-                <HBox prefHeight="42.0" prefWidth="644.0">
-                    <children>
-                        <AnchorPane prefHeight="39.0" prefWidth="642.0">
-                            <children>
-                                <Label alignment="CENTER" layoutX="226.0" layoutY="9.0" prefHeight="28.0" prefWidth="182.0" text="Edit Book">
-                                    <font>
-                                        <Font size="19.0" />
-                                    </font>
-                                </Label>
                             </children>
                         </AnchorPane>
                     </children>

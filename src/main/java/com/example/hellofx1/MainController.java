@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,8 +18,6 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-
 
 
 public class MainController implements Initializable {
@@ -74,6 +73,7 @@ public class MainController implements Initializable {
                             Gson gson = new Gson();
                             Book book = gson.fromJson(br, Book.class);
                             observableBookList.add(book);
+                            tempResults.add(book);
                         } catch (IOException e) {
                             System.err.println("Error reading file: " + file.getAbsolutePath()); // Debug
                             e.printStackTrace();
@@ -103,8 +103,8 @@ public class MainController implements Initializable {
         edition.setCellValueFactory(new PropertyValueFactory<Book, String>("Edition"));
         tags.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("Tags"));
         date.setCellValueFactory(new PropertyValueFactory<Book, String>("Date"));
-        language.setCellValueFactory(new PropertyValueFactory<Book,String>("language"));
-        rating.setCellValueFactory(new PropertyValueFactory<Book,Double>("rating"));
+        language.setCellValueFactory(new PropertyValueFactory<Book, String>("language"));
+        rating.setCellValueFactory(new PropertyValueFactory<Book, Double>("rating"));
 
         // loadBooksFromJson();
         bookTableView.setItems(observableBookList);
@@ -127,15 +127,16 @@ public class MainController implements Initializable {
 
 
     }
+
     @FXML
-    public void DeleteButton(ActionEvent event){
-        if(!observableBookList.isEmpty()){
-            Alert deleteAlert = new Alert(Alert.AlertType.WARNING,"Confirm", ButtonType.OK,ButtonType.CANCEL);
+    public void DeleteButton(ActionEvent event) {
+        if (!observableBookList.isEmpty()) {
+            Alert deleteAlert = new Alert(Alert.AlertType.WARNING, "Confirm", ButtonType.OK, ButtonType.CANCEL);
             deleteAlert.setContentText("Are you sure you want to delete this?\n\n THIS CANNOT BE UNDONE.");
             deleteAlert.initModality(Modality.APPLICATION_MODAL);
             deleteAlert.showAndWait();
 
-            if(deleteAlert.getResult() == ButtonType.OK){
+            if (deleteAlert.getResult() == ButtonType.OK) {
                 ArrayList<Book> selectedBooks = new ArrayList<>(bookTableView.getSelectionModel().getSelectedItems());
                 observableBookList.removeAll(bookTableView.getSelectionModel().getSelectedItems());
                 for (Book selectedBook : selectedBooks) {
@@ -144,20 +145,20 @@ public class MainController implements Initializable {
                 bookTableView.getSelectionModel().clearSelection();
                 tempResults.clear();
                 tempResults.addAll(observableBookList);
-            } else{
+            } else {
                 deleteAlert.close();
             }
         }
-
     }
 
 
     public void deleteSelectedBook(Book selectedBook) {
 
-        String folderPath = "Mylibrary/books/";
+        String folderPath = "Mylibrary/books";
+
+        String filePath = folderPath + "/" + selectedBook.getIsbn() + ".json";
         String imagePath = selectedBook.getCoverImage(); // Kitaba ait resmin yolu
 
-        String filePath = folderPath + File.separator + selectedBook.getTitle() + ".json";
         File file = new File(filePath);
 
         if (file.exists()) {
@@ -186,10 +187,6 @@ public class MainController implements Initializable {
         }
     }
 
-
-
-
-
     @FXML
     public void AddButton() {
         FXMLLoader add = new FXMLLoader(getClass().getResource("Add.fxml"));
@@ -206,12 +203,32 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    public void editButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit.fxml"));
+        Parent root = loader.load();
+
+        Book editbook = bookTableView.getSelectionModel().getSelectedItem();
+
+        EditController editController = loader.getController();
+        editController.showInformation(editbook);
+
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Edit Book");
+        stage.show();
+
+
+    }
+
+    @FXML
     public void helpDisplay() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information !!!");
         alert.setHeaderText("about 2024");
         alert.showAndWait();
     }
+
     public void UpdateButton() {
         observableBookList.clear();
         observableBookList.addAll(tempResults);

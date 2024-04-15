@@ -49,6 +49,8 @@ public class SearchController {
         String editionSearch = edition.getText();
         String pageSearch = page.getText();
         String tagSearch = tags.getText().toLowerCase();
+        double ratingSearch = rating.getRating();
+        String languageSearch = language.getText().toLowerCase();
 
         ArrayList<Book> results = new ArrayList<>();
         for (Book book : MainController.tempResults) {
@@ -64,11 +66,12 @@ public class SearchController {
                         (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains(coverTypeSearch)) &&
                         (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
                         (pageSearch.isEmpty() || book.getPage() == Integer.parseInt(pageSearch)) &&
-                        (tagSearch.isEmpty() || book.getTags().contains(tagSearch))) {
+                        (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) &&
+                        (languageSearch.isEmpty() || book.getLanguage().contains(languageSearch)) && (ratingSearch == 0 || book.getRating() == ratingSearch)) {
                     results.add(book);
                 }
             }
-            {
+          else  {
                 if (
                         (titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
                                 (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
@@ -79,7 +82,8 @@ public class SearchController {
                                 (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains(coverTypeSearch)) &&
                                 (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
                                 (pageSearch.isEmpty() || book.getPage() == Integer.parseInt(pageSearch)) &&
-                                (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) && (dateSearch.isEmpty() || book.getDate().contains(dateSearch))) {
+                                (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) && (dateSearch.isEmpty() || book.getDate().contains(dateSearch)) && (languageSearch.isEmpty() || book.getLanguage().contains(languageSearch))&&
+                                (ratingSearch == 0 || book.getRating() == ratingSearch) ) {
                     results.add(book);
                 }
             }

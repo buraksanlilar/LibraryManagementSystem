@@ -1,6 +1,8 @@
 package com.example.hellofx1;
 
 
+import java.util.Random;
+
 public class Book {
     public String title;
     public String subtitle;
@@ -16,9 +18,18 @@ public class Book {
     public String tags;
     public String language;
     public double rating;
+    public int randomID;
 
     public double getRating() {
         return rating;
+    }
+
+    public int getRandomID() {
+        return randomID;
+    }
+
+    public void setRandomID(int randomID) {
+        this.randomID = randomID;
     }
 
     public void setRating(double rating) {
@@ -56,7 +67,7 @@ public class Book {
     }
 
     public void setAuthors(String authors) {
-
+        this.authors = authors;
     }
 
     public String getTranslators() {
@@ -132,6 +143,7 @@ public class Book {
     }
 
     public Book(){
+        Random random = new Random();
 
     }
 
