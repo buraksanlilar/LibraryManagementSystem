@@ -193,7 +193,7 @@ public class MainController implements Initializable {
         Stage addButton = new Stage();
         addButton.setTitle("Add");
         try {
-            addButton.setScene(new Scene(add.load(), 654, 466));
+            addButton.setScene(new Scene(add.load(), 655, 719));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

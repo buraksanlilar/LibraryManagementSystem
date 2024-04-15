@@ -8,12 +8,15 @@ import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 
 import static com.example.hellofx1.MainController.observableBookList;
@@ -60,20 +63,85 @@ public class EditController {
     @FXML
     private Rating rating;
     @FXML
-    private ImageView image;
-
+    private ImageView imageView;
     @FXML
-    private Button editButton;
-
+    private Button imageButton;
     @FXML
     private Button resetButton;
     boolean checkDateNull = false;
-    String tempTitle;
-    private String tempIsbn;
+    private File imageFile;
 
+    private String tempIsbn;
+    @FXML
+    public void editImage(){
+// Resim seçme işlemi
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Resim Seç");
+
+        // Sadece resim dosyalarını filtrele
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Resim Dosyaları", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        // Seçilen resmi al
+        Stage stage = (Stage) imageButton.getScene().getWindow();
+        imageFile = fileChooser.showOpenDialog(stage);
+
+        // Seçilen resmi göster
+        if (imageFile != null) {
+            // Seçilen resmi yükle ve ImageView'da göster
+            Image image = new Image(imageFile.toURI().toString());
+            imageView.setImage(image);
+        }
+    }
+    public void addImage() {
+        String imagePath = bookToEdit.getCoverImage();
+
+        if (imagePath != null && !imagePath.isEmpty()) {
+            File imageFile = new File(imagePath);
+            if (imageFile.exists()) {
+                if (imageFile.delete()) {
+                    System.out.println(imagePath + " başarıyla silindi.");
+                }
+            }}
+
+
+                String imagesDirectory = "MyLibrary/images/";
+                File imagesDir = new File(imagesDirectory);
+
+                if (!imagesDir.exists()) {
+                    try {
+                        imagesDir.mkdirs();
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Error creating images directory.", ButtonType.OK);
+                        alert.showAndWait();
+                        return;
+                    }
+                }
+                if (imageFile != null) {
+                    String imageName = imageFile.getName();
+                    String targetPath = imagesDirectory + imageName;
+                    try {
+                        Files.copy(imageFile.toPath(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Error copying image file.", ButtonType.OK);
+                        alert.showAndWait();
+                        return;
+                    }
+                    bookToEdit.setCoverImage(targetPath);
+                }
+
+    }
 
     public void showInformation(Book editbook) {
         bookToEdit = editbook;
+
+        String imagePath = editbook.getCoverImage();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            Image image = new Image(new File(imagePath).toURI().toString());
+            imageView.setImage(image);
+        }
         if (bookToEdit.getTitle() != null) {
 
             title.setText(editbook.getTitle());
@@ -106,8 +174,6 @@ public class EditController {
 
     @FXML
     public void confirmChanges() {
-        // Kitap bilgilerini güncelle
-        tempTitle = bookToEdit.getTitle();
 
         tempIsbn = bookToEdit.getIsbn();
         bookToEdit.setTitle(title.getText());
@@ -126,6 +192,8 @@ public class EditController {
         bookToEdit.setTags(tags.getText());
         bookToEdit.setRating(rating.getRating());
         bookToEdit.setLanguage(language.getText());
+
+        addImage();
 
         // Mevcut JSON dosyasını güncelle
         updateJsonFile(bookToEdit);
@@ -146,6 +214,7 @@ public class EditController {
     }
 
 
+
     private void updateJsonFile(Book bookToEdit) {
         String folderPath = "MyLibrary/books/";
         String oldFilePath = folderPath + File.separator + tempIsbn + ".json";
@@ -153,7 +222,7 @@ public class EditController {
         File oldFile = new File(oldFilePath);
         File newFile = new File(newFilePath);
 
-        if (!tempIsbn.equals(bookToEdit.getIsbn())) { // Eğer eski ISBN yeni ISBN'e eşit değilse
+        if (!tempIsbn.equals(bookToEdit.getIsbn())) {
             if (oldFile.exists()) {
                 if (oldFile.delete()) {
                     System.out.println("Eski dosya silindi.");
@@ -168,7 +237,7 @@ public class EditController {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonObject bookJson = new JsonObject();
 
-        // Kitap bilgilerini JSON nesnesine ekle
+
         bookJson.addProperty("title", bookToEdit.getTitle());
         bookJson.addProperty("subtitle", bookToEdit.getSubtitle());
         bookJson.addProperty("isbn", bookToEdit.getIsbn());
@@ -182,6 +251,7 @@ public class EditController {
         bookJson.addProperty("tag", bookToEdit.getTags());
         bookJson.addProperty("rating", bookToEdit.getRating());
         bookJson.addProperty("language", bookToEdit.getLanguage());
+        bookJson.addProperty("coverImage", bookToEdit.getCoverImage());
 
         // Yeni JSON dosyasını oluştur
         try (FileWriter fileWriter = new FileWriter(newFile)) {

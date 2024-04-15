@@ -60,7 +60,33 @@ public class AddController {
     @FXML
     private TextField language;
     @FXML
+    private ImageView imageView;
+    private File imageFile;
+
+    @FXML
+    public void selectImage(){
+        // Resim seçme işlemi
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Resim Seç");
+
+        // Sadece resim dosyalarını filtrele
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Resim Dosyaları", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        // Seçilen resmi al
+        Stage stage = (Stage) imageButton.getScene().getWindow();
+        imageFile = fileChooser.showOpenDialog(stage);
+
+        // Seçilen resmi göster
+        if (imageFile != null) {
+            // Seçilen resmi yükle ve ImageView'da göster
+            Image image = new Image(imageFile.toURI().toString());
+            imageView.setImage(image);
+        }
+    }
+
     public void addImage(){
+
         String imagesDirectory = "MyLibrary/images/";
         File imagesDir = new File(imagesDirectory);
 
@@ -74,21 +100,11 @@ public class AddController {
                 return;
             }
         }
-
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Choose an image");
-
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg");
-        fc.getExtensionFilters().add(extensionFilter);
-
-        Stage stage = (Stage) imageButton.getScene().getWindow();
-        File file = fc.showOpenDialog(stage);
-
-        if(file != null){
-            String imageName = file.getName();
+        if(imageFile != null){
+            String imageName = imageFile.getName();
             String targetPath = imagesDirectory + imageName;
             try {
-                Files.copy(file.toPath(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(imageFile.toPath(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error copying image file.", ButtonType.OK);
@@ -97,6 +113,8 @@ public class AddController {
             }
             imagePath = targetPath;
         }
+
+
     }
 
 
@@ -133,13 +151,13 @@ public class AddController {
             return;
         }
 
-        // newbook.setCoverImage(image.getText());
         newbook.setTags(tag.getText());
-        newbook.setCoverImage(imagePath);
+
         newbook.setRating(bookRating.getRating());
         newbook.setLanguage(language.getText());
+        addImage();
+        newbook.setCoverImage(imagePath);
 
-        // books.add(newbook);
 
         //  observableBookList.clear();
         tempResults.add(newbook);

@@ -164,7 +164,7 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Rating fx:id="rating" layoutX="115.0" layoutY="16.0" prefHeight="32.0" prefWidth="104.0" />
+                        <Rating fx:id="rating" layoutX="115.0" layoutY="16.0" prefHeight="32.0" prefWidth="104.0" rating="0.0" />
                      </children>
                   </AnchorPane>
                </children>

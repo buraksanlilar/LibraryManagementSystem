@@ -34,8 +34,9 @@
                     <children>
                         <AnchorPane prefHeight="218.0" prefWidth="654.0">
                             <children>
-                                <ImageView fx:id="image" fitHeight="192.0" fitWidth="200.0" layoutX="224.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fx:id="imageView" fitHeight="192.0" fitWidth="200.0" layoutX="224.0" pickOnBounds="true" preserveRatio="true" />
                                 <Label layoutX="136.0" layoutY="87.0" prefHeight="18.0" prefWidth="77.0" text="Cover Image" />
+                        <Button fx:id="imageButton" layoutX="474.0" layoutY="84.0" mnemonicParsing="false" onAction="#editImage" text="Change image" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -202,7 +203,7 @@
                                                 <AnchorPane prefHeight="57.0" prefWidth="307.0">
                                                     <children>
                                                         <Button layoutX="166.0" layoutY="18.0" mnemonicParsing="false" onAction="#confirmChanges" prefHeight="26.0" prefWidth="60.0" text="Confirm" />
-                                                        <Button layoutX="232.0" layoutY="18.0" mnemonicParsing="false" onAction="#ResetInput" prefHeight="25.0" prefWidth="54.0" text="Reset" />
+                                                        <Button fx:id="resetButton" layoutX="232.0" layoutY="18.0" mnemonicParsing="false" onAction="#ResetInput" prefHeight="25.0" prefWidth="54.0" text="Reset" />
                                                     </children>
                                                 </AnchorPane>
                                             </children>
