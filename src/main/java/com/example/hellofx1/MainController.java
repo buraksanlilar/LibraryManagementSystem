@@ -158,7 +158,7 @@ public class MainController implements Initializable {
         String folderPath = "Mylibrary/books/";
         String imagePath = selectedBook.getCoverImage(); // Kitaba ait resmin yolu
 
-        String filePath = folderPath + File.separator + selectedBook.getTitle() + ".json";
+        String filePath = folderPath + File.separator + selectedBook.getIsbn() + ".json";
         File file = new File(filePath);
 
         if (file.exists()) {

@@ -173,7 +173,7 @@ public class AddController {
             folder.mkdirs();
         }
 
-        String baseFileName = book.getTitle();
+        String baseFileName = book.getIsbn();
         String filePath = folderPath + File.separator + baseFileName + ".json";
         File file = new File(filePath);
 
