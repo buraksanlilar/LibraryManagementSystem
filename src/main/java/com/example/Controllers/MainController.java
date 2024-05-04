@@ -2,12 +2,14 @@ package com.example.Controllers;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,7 +23,7 @@ import java.util.ResourceBundle;
 
 
 public class MainController implements Initializable {
-
+    public static String temporaryFolder ="Mylibrary/books/";
     @FXML
     private TableView<Book> bookTableView;
     @FXML
@@ -51,7 +53,6 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Book, String> date;
     public static ObservableList<Book> observableBookList = FXCollections.observableArrayList();
-
     @FXML
     private Button AddButton;
     @FXML
@@ -59,10 +60,15 @@ public class MainController implements Initializable {
     @FXML
     private Button UpdateButton;
     static ArrayList<Book> tempResults = new ArrayList<>();
+    private Window stage;
 
     public void loadBooksFromJson() {
         try {
-            File folder = new File("Mylibrary/books/");
+            if(observableBookList != null){
+                observableBookList.clear();
+            }
+
+            File folder = new File(temporaryFolder);
             File[] listOfFiles = folder.listFiles();
 
             if (listOfFiles != null) {
@@ -92,6 +98,8 @@ public class MainController implements Initializable {
         bookTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         loadBooksFromJson();
 
+
+
         title.setCellValueFactory(new PropertyValueFactory<Book, String>("Title"));
         subtitle.setCellValueFactory(new PropertyValueFactory<Book, String>("Subtitle"));
         isbn.setCellValueFactory(new PropertyValueFactory<Book, String>("Isbn"));
@@ -106,7 +114,7 @@ public class MainController implements Initializable {
         language.setCellValueFactory(new PropertyValueFactory<Book, String>("language"));
         rating.setCellValueFactory(new PropertyValueFactory<Book, Double>("rating"));
 
-        // loadBooksFromJson();
+
         bookTableView.setItems(observableBookList);
 
 
@@ -154,31 +162,15 @@ public class MainController implements Initializable {
 
     public void deleteSelectedBook(Book selectedBook) {
 
-        String folderPath = "Mylibrary/books";
+        String folderPath = temporaryFolder;
 
         String filePath = folderPath + "/" + selectedBook.getIsbn() + ".json";
-        String imagePath = selectedBook.getCoverImage();
 
         File file = new File(filePath);
 
         if (file.exists()) {
             if (file.delete()) {
                 System.out.println(filePath + " başarıyla silindi.");
-
-
-                if (imagePath != null && !imagePath.isEmpty()) {
-                    File imageFile = new File(imagePath);
-                    if (imageFile.exists()) {
-                        if (imageFile.delete()) {
-                            System.out.println(imagePath + " başarıyla silindi.");
-                        } else {
-                            System.out.println(imagePath + " silinemedi.");
-                        }
-                    } else {
-                        System.out.println("Belirtilen resim dosyası bulunamadı.");
-                    }
-                }
-
             } else {
                 System.out.println(filePath + " silinemedi.");
             }
@@ -218,7 +210,6 @@ public class MainController implements Initializable {
         stage.setTitle("Edit Book");
         stage.show();
 
-
     }
 
     @FXML
@@ -236,15 +227,72 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
     @FXML
-    public void exportAsJSON(){
+    public void exportButton(ActionEvent event){
+        if (!observableBookList.isEmpty()) {
+            Alert exportAlert = new Alert(Alert.AlertType.WARNING, "Confirm", ButtonType.OK, ButtonType.CANCEL);
+            exportAlert.setContentText("Are you sure you want to export these books?\n\n");
+            exportAlert.initModality(Modality.APPLICATION_MODAL);
+            exportAlert.showAndWait();
 
+            if (exportAlert.getResult() == ButtonType.OK) {
+                ArrayList<Book> selectedBooks = new ArrayList<>(bookTableView.getSelectionModel().getSelectedItems());
+                DirectoryChooser dc = new DirectoryChooser();
+                dc.setTitle("Select folder to save books");
+                File selectedDirectory = dc.showDialog(stage);
+
+                for (Book selectedBook : selectedBooks) {
+                    exportAsJSON(selectedBook,selectedDirectory);
+                }
+
+                bookTableView.getSelectionModel().clearSelection();
+            } else {
+                exportAlert.close();
+            }
+        }
+    }
+
+    public void exportAsJSON(Book selectedBook,File selectedDirectory) {
+
+        if (selectedDirectory != null) {
+            String folderPath = selectedDirectory.getAbsolutePath() + "/ExportedBooks";
+            File folder = new File(folderPath);
+
+            if (!folder.exists()) {
+                if (folder.mkdirs()) {
+                    System.out.println("Folder created: " + folderPath);
+                } else {
+                    System.out.println("Failed to create folder: " + folderPath);
+                    return; // Exit the method if folder creation fails
+                }
+            }
+            String filePath = folderPath + "/" + selectedBook.getIsbn() + ".json";
+            try (FileWriter writer = new FileWriter(filePath)) {
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                gson.toJson(selectedBook, writer);
+                System.out.println("Book exported as JSON: " + filePath);
+            } catch (IOException e) {
+                System.err.println("Error exporting book as JSON: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
     @FXML
-    public void importAsJSON(){
+    public void importAsJSON() {
+        try {
+            DirectoryChooser dc = new DirectoryChooser();
+            dc.setTitle("Select folder to open!");
+            File folder = dc.showDialog(stage);
+            temporaryFolder = folder.getAbsolutePath();
 
+            loadBooksFromJson();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     }
 
 
 
 
-}
+

@@ -18,9 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-
-import static com.example.Controllers.MainController.observableBookList;
-import static com.example.Controllers.MainController.tempResults;
+import static com.example.Controllers.MainController.*;
 
 
 public class AddController {
@@ -70,7 +68,7 @@ public class AddController {
         fileChooser.setTitle("Resim Seç");
 
 
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Resim Dosyaları", "*.png", "*.jpg", "*.jpeg");
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Select a image", "*.png", "*.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
 
 
@@ -85,32 +83,8 @@ public class AddController {
     }
 
     public void addImage(){
-
-        String imagesDirectory = "MyLibrary/images/";
-        File imagesDir = new File(imagesDirectory);
-
-        if (!imagesDir.exists()) {
-            try {
-                imagesDir.mkdirs();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error creating images directory.", ButtonType.OK);
-                alert.showAndWait();
-                return;
-            }
-        }
         if(imageFile != null){
-            String imageName = imageFile.getName();
-            String targetPath = imagesDirectory + imageName;
-            try {
-                Files.copy(imageFile.toPath(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error copying image file.", ButtonType.OK);
-                alert.showAndWait();
-                return;
-            }
-            imagePath = targetPath;
+            imagePath = imageFile.getAbsolutePath();
         }
     }
 
@@ -181,7 +155,7 @@ public class AddController {
         bookJson.addProperty("language", book.getLanguage());
 
 
-        String folderPath = "MyLibrary/books/";
+        String folderPath = temporaryFolder;
         File folder = new File(folderPath);
         if (!folder.exists()) {
             folder.mkdirs();

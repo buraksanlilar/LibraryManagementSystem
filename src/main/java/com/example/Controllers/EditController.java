@@ -18,8 +18,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 
-import static com.example.Controllers.MainController.observableBookList;
-import static com.example.Controllers.MainController.tempResults;
+import static com.example.Controllers.MainController.*;
 
 public class EditController {
 
@@ -105,34 +104,10 @@ public class EditController {
                 }
             }
         }
-
-                String imagesDirectory = "MyLibrary/images/";
-                File imagesDir = new File(imagesDirectory);
-
-                if (!imagesDir.exists()) {
-                    try {
-                        imagesDir.mkdirs();
-                    } catch (SecurityException e) {
-                        e.printStackTrace();
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Error creating images directory.", ButtonType.OK);
-                        alert.showAndWait();
-                        return;
-                    }
-                }
                 if (imageFile != null) {
-                    String imageName = imageFile.getName();
-                    String targetPath = imagesDirectory + imageName;
-                    try {
-                        Files.copy(imageFile.toPath(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Error copying image file.", ButtonType.OK);
-                        alert.showAndWait();
-                        return;
-                    }
+                    String targetPath = imageFile.getAbsolutePath();
                     bookToEdit.setCoverImage(targetPath);
                 }
-
     }
 
     public void showInformation(Book editbook) {
@@ -220,7 +195,7 @@ public class EditController {
 
 
     private void updateJsonFile(Book bookToEdit) {
-        String folderPath = "MyLibrary/books/";
+        String folderPath = temporaryFolder;
         String oldFilePath = folderPath + File.separator + tempIsbn + ".json";
         String newFilePath = folderPath + File.separator + bookToEdit.getIsbn() + ".json";
         File oldFile = new File(oldFilePath);
