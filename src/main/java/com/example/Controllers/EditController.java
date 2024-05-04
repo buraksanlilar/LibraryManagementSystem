@@ -69,6 +69,7 @@ public class EditController {
     private Button resetButton;
     boolean checkDateNull = false;
     private File imageFile;
+    private boolean edited =  false;
 
     private String tempIsbn;
     @FXML
@@ -90,6 +91,8 @@ public class EditController {
             Image image = new Image(imageFile.toURI().toString());
             imageView.setImage(image);
         }
+
+        edited = true;
     }
     public void addImage() {
         String imagePath = bookToEdit.getCoverImage();
@@ -191,7 +194,10 @@ public class EditController {
         bookToEdit.setRating(rating.getRating());
         bookToEdit.setLanguage(language.getText());
 
-        addImage();
+       if(edited){
+           addImage();
+       }
+
 
 
         updateJsonFile(bookToEdit);

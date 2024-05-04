@@ -235,11 +235,16 @@ public class MainController implements Initializable {
 
         alert.showAndWait();
     }
+    @FXML
+    public void exportAsJSON(){
 
-    public void UpdateButton() {
-        observableBookList.clear();
-        observableBookList.addAll(tempResults);
     }
+    @FXML
+    public void importAsJSON(){
+
+    }
+
+
 
 
 }

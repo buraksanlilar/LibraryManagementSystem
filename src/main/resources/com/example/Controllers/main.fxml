@@ -16,6 +16,12 @@
             <children>
                 <MenuBar prefHeight="25.0" prefWidth="919.0">
                     <menus>
+                  <Menu mnemonicParsing="false" text="File">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Import" />
+                        <MenuItem mnemonicParsing="false" text="Export" />
+                    </items>
+                  </Menu>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#helpDisplay" text="How to use" />
@@ -34,7 +40,6 @@
                                         <Button layoutX="30.0" layoutY="107.0" mnemonicParsing="false" onAction="#DeleteButton" prefHeight="40.0" prefWidth="87.0" text="Delete" />
                                         <Button layoutX="30.0" layoutY="169.0" mnemonicParsing="false" onAction="#editButton" prefHeight="40.0" prefWidth="87.0" text="Edit" />
                                         <Button fx:id="searchButton" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#SearchButton" prefHeight="40.0" prefWidth="87.0" text="Search" />
-                                        <Button fx:id="UpdateButton" layoutX="29.0" layoutY="294.0" mnemonicParsing="false" onAction="#UpdateButton" prefHeight="40.0" prefWidth="87.0" text="Update" />
                                     </children>
                                 </AnchorPane>
                             </children>

@@ -63,13 +63,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="isbn" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="isbn" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="isbn" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Translators">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="translator" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="translator" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="translators" />
                      </children>
                   </AnchorPane>
                </children>
@@ -83,13 +83,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="publisher" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="publisher" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="publisher" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Date">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="date" layoutX="357.0" layoutY="16.0" prefHeight="25.0" prefWidth="104.0" />
+                        <DatePicker fx:id="date" layoutX="357.0" layoutY="16.0" prefHeight="25.0" prefWidth="104.0" promptText="date" />
                      </children>
                   </AnchorPane>
                </children>
@@ -103,13 +103,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="covertype" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="covertype" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="cover" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Edition">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="edition" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="edition" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="edition" />
                      </children>
                   </AnchorPane>
                </children>
@@ -123,13 +123,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="page" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="page" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="page" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Tags">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tags" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="tags" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="tags" />
                      </children>
                   </AnchorPane>
                </children>
@@ -143,13 +143,13 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="authors" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                        <TextField fx:id="authors" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="authors" />
                         <Label layoutX="34.0" layoutY="19.0" prefHeight="26.0" prefWidth="82.0" text="Language">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="language" layoutX="128.0" layoutY="19.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
+                        <TextField fx:id="language" layoutX="128.0" layoutY="19.0" prefHeight="26.0" prefWidth="110.0" promptText="language" />
                      </children>
                   </AnchorPane>
                </children>
@@ -158,13 +158,14 @@
                <children>
                   <AnchorPane prefHeight="66.0" prefWidth="475.0">
                      <children>
-                              <Button layoutX="357.0" layoutY="17.0" mnemonicParsing="false" onAction="#Show" prefHeight="30.0" prefWidth="104.0" text="Search" />
+                              <Button layoutX="311.0" layoutY="17.0" mnemonicParsing="false" onAction="#Show" prefHeight="30.0" prefWidth="68.0" text="Search" />
                         <Label layoutX="33.0" layoutY="19.0" prefHeight="26.0" prefWidth="82.0" text="Rating">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
                         <Rating fx:id="rating" layoutX="115.0" layoutY="16.0" prefHeight="32.0" prefWidth="104.0" rating="0.0" />
+                        <Button fx:id="ResetButton" layoutX="393.0" layoutY="17.0" mnemonicParsing="false" onAction="#ResetButton" prefHeight="30.0" prefWidth="68.0" text="Reset" />
                      </children>
                   </AnchorPane>
                </children>

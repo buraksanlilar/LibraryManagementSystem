@@ -1,11 +1,15 @@
 package com.example.Controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.Rating;
 
 import java.util.ArrayList;
+
+import static com.example.Controllers.MainController.observableBookList;
+import static com.example.Controllers.MainController.tempResults;
 
 public class SearchController {
     @FXML
@@ -35,6 +39,8 @@ public class SearchController {
     @FXML
     private TextField language;
     @FXML
+    private Button ResetButton;
+    @FXML
     public ArrayList<Book> searchBooks() {
 
         String titleSearch = title.getText().toLowerCase();
@@ -52,7 +58,7 @@ public class SearchController {
         String languageSearch = language.getText().toLowerCase();
 
         ArrayList<Book> results = new ArrayList<>();
-        for (Book book : MainController.tempResults) {
+        for (Book book : tempResults) {
 
             if (date.getValue() == null) {
                 if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
@@ -103,11 +109,15 @@ public class SearchController {
         page.clear();
         tags.clear();
     }
+    @FXML
+    public void ResetButton() {
+        observableBookList.clear();
+        observableBookList.addAll(tempResults);
+    }
 
     @FXML
-
     public void Show() {
         ArrayList<Book> searchResults = searchBooks();
-        MainController.observableBookList.setAll(searchResults);
+        observableBookList.setAll(searchResults);
     }
 }
