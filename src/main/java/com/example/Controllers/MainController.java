@@ -62,36 +62,7 @@ public class MainController implements Initializable {
     static ArrayList<Book> tempResults = new ArrayList<>();
     private Window stage;
 
-    public void loadBooksFromJson() {
-        try {
-            if(observableBookList != null){
-                observableBookList.clear();
-            }
 
-            File folder = new File(temporaryFolder);
-            File[] listOfFiles = folder.listFiles();
-
-            if (listOfFiles != null) {
-                for (File file : listOfFiles) {
-                    if (file.isFile() && file.getName().endsWith(".json")) {
-                        System.out.println("Reading file: " + file.getAbsolutePath()); // Debug
-                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                            Gson gson = new Gson();
-                            Book book = gson.fromJson(br, Book.class);
-                            observableBookList.add(book);
-                            tempResults.add(book);
-                        } catch (IOException e) {
-                            System.err.println("Error reading file: " + file.getAbsolutePath()); // Debug
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            System.err.println("Unexpected error: " + ex.getMessage()); // Debug
-            ex.printStackTrace();
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -138,25 +109,33 @@ public class MainController implements Initializable {
 
     @FXML
     public void DeleteButton(ActionEvent event) {
-        if (!observableBookList.isEmpty()) {
-            Alert deleteAlert = new Alert(Alert.AlertType.WARNING, "Confirm", ButtonType.OK, ButtonType.CANCEL);
-            deleteAlert.setContentText("Are you sure you want to delete this?\n\n THIS CANNOT BE UNDONE.");
-            deleteAlert.initModality(Modality.APPLICATION_MODAL);
-            deleteAlert.showAndWait();
+        if(bookTableView.getSelectionModel().getSelectedItem()==null){
+            Alert nullAlert = new Alert(Alert.AlertType.ERROR,"Back",ButtonType.CLOSE);
+            nullAlert.setContentText("You need to select a book to delete!");
+            nullAlert.initModality(Modality.WINDOW_MODAL);
+            nullAlert.showAndWait();
+        } else{
+            if (!observableBookList.isEmpty()) {
+                Alert deleteAlert = new Alert(Alert.AlertType.WARNING, "Confirm", ButtonType.OK, ButtonType.CANCEL);
+                deleteAlert.setContentText("Are you sure you want to delete this?\n\n THIS CANNOT BE UNDONE.");
+                deleteAlert.initModality(Modality.APPLICATION_MODAL);
+                deleteAlert.showAndWait();
 
-            if (deleteAlert.getResult() == ButtonType.OK) {
-                ArrayList<Book> selectedBooks = new ArrayList<>(bookTableView.getSelectionModel().getSelectedItems());
-                observableBookList.removeAll(bookTableView.getSelectionModel().getSelectedItems());
-                for (Book selectedBook : selectedBooks) {
-                    deleteSelectedBook(selectedBook);
+                if (deleteAlert.getResult() == ButtonType.OK) {
+                    ArrayList<Book> selectedBooks = new ArrayList<>(bookTableView.getSelectionModel().getSelectedItems());
+                    observableBookList.removeAll(bookTableView.getSelectionModel().getSelectedItems());
+                    for (Book selectedBook : selectedBooks) {
+                        deleteSelectedBook(selectedBook);
+                    }
+                    bookTableView.getSelectionModel().clearSelection();
+                    tempResults.clear();
+                    tempResults.addAll(observableBookList);
+                } else {
+                    deleteAlert.close();
                 }
-                bookTableView.getSelectionModel().clearSelection();
-                tempResults.clear();
-                tempResults.addAll(observableBookList);
-            } else {
-                deleteAlert.close();
             }
         }
+
     }
 
 
@@ -196,19 +175,31 @@ public class MainController implements Initializable {
 
     @FXML
     public void editButton() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit.fxml"));
-        Parent root = loader.load();
 
-        Book editbook = bookTableView.getSelectionModel().getSelectedItem();
+        if(bookTableView.getSelectionModel().getSelectedItem()==null){
+            Alert nullAlert = new Alert(Alert.AlertType.ERROR,"Back",ButtonType.CLOSE);
+            nullAlert.setContentText("You need to select a book to edit!!");
+            nullAlert.initModality(Modality.WINDOW_MODAL);
+            nullAlert.showAndWait();
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Edit.fxml"));
+            Parent root = loader.load();
 
-        EditController editController = loader.getController();
-        editController.showInformation(editbook);
+            Book editbook = bookTableView.getSelectionModel().getSelectedItem();
+
+            EditController editController = loader.getController();
+            editController.showInformation(editbook);
 
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Edit Book");
-        stage.show();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Edit Book");
+            stage.show();
+        }
+
+
+
+
 
     }
 
@@ -226,10 +217,42 @@ public class MainController implements Initializable {
 
         alert.showAndWait();
     }
+
+    public void loadBooksFromJson() {
+        try {
+            if(observableBookList != null){
+                observableBookList.clear();
+            }
+
+            File folder = new File(temporaryFolder);
+            File[] listOfFiles = folder.listFiles();
+
+            if (listOfFiles != null) {
+                for (File file : listOfFiles) {
+                    if (file.isFile() && file.getName().endsWith(".json")) {
+                        System.out.println("Reading file: " + file.getAbsolutePath()); // Debug
+                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                            Gson gson = new Gson();
+                            Book book = gson.fromJson(br, Book.class);
+                            observableBookList.add(book);
+                            tempResults.add(book);
+                        } catch (IOException e) {
+                            System.err.println("Error reading file: " + file.getAbsolutePath()); // Debug
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("Unexpected error: " + ex.getMessage()); // Debug
+            ex.printStackTrace();
+        }
+    }
+
     @FXML
     public void exportButton(ActionEvent event){
         if (!observableBookList.isEmpty()) {
-            Alert exportAlert = new Alert(Alert.AlertType.WARNING, "Confirm", ButtonType.OK, ButtonType.CANCEL);
+            Alert exportAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm", ButtonType.OK, ButtonType.CANCEL);
             exportAlert.setContentText("Are you sure you want to export these books?\n\n");
             exportAlert.initModality(Modality.APPLICATION_MODAL);
             exportAlert.showAndWait();
@@ -252,6 +275,8 @@ public class MainController implements Initializable {
     }
 
     public void exportAsJSON(Book selectedBook,File selectedDirectory) {
+
+        // should we create directory or not ??
 
         if (selectedDirectory != null) {
             String folderPath = selectedDirectory.getAbsolutePath() + "/ExportedBooks";
