@@ -12,6 +12,7 @@ import static com.example.Controllers.MainController.observableBookList;
 import static com.example.Controllers.MainController.tempResults;
 
 public class SearchController {
+    static boolean searched = false;
     @FXML
     private TextField title;
     @FXML
@@ -93,6 +94,7 @@ public class SearchController {
             }
         }
         reset();
+        searched = true;
         return results;
     }
 

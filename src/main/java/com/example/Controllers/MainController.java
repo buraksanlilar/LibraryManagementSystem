@@ -127,9 +127,22 @@ public class MainController implements Initializable {
                     for (Book selectedBook : selectedBooks) {
                         deleteSelectedBook(selectedBook);
                     }
+
+                    if(SearchController.searched){
+                        tempResults.removeAll(selectedBooks);
+                    }
+
+
+
                     bookTableView.getSelectionModel().clearSelection();
-                    tempResults.clear();
-                    tempResults.addAll(observableBookList);
+
+                    if(!SearchController.searched) {
+                        tempResults.clear();
+                        tempResults.addAll(observableBookList);
+                    }
+
+
+
                 } else {
                     deleteAlert.close();
                 }
