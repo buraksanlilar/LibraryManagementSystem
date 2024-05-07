@@ -2,6 +2,7 @@ package com.example.Controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,6 +18,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 import static com.example.Controllers.MainController.*;
 
@@ -37,11 +41,7 @@ public class AddController {
     @FXML
     private DatePicker date;
     @FXML
-    private TextField covertype;
-    @FXML
     private TextField edition;
-    @FXML
-    private TextField page;
     @FXML
     private TextField tag;
     @FXML
@@ -52,7 +52,7 @@ public class AddController {
     private Button closeButton;
     @FXML
     private Button imageButton;
-    private String imagePath;
+    private String imagePath = "";
     @FXML
     private Rating bookRating;
     @FXML
@@ -65,10 +65,10 @@ public class AddController {
     public void selectImage(){
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Resim Seç");
+        fileChooser.setTitle("Choose a image");
 
 
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Select a image", "*.png", "*.jpg", "*.jpeg");
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
 
 
@@ -83,8 +83,32 @@ public class AddController {
     }
 
     public void addImage(){
+
+        String imagesDirectory = "MyLibrary/images/";
+        File imagesDir = new File(imagesDirectory);
+
+        if (!imagesDir.exists()) {
+            try {
+                imagesDir.mkdirs();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error creating images directory.", ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
+        }
         if(imageFile != null){
-            imagePath = imageFile.getAbsolutePath();
+            String imageName = imageFile.getName();
+            String targetPath = imagesDirectory + imageName;
+            try {
+                Files.copy(imageFile.toPath(), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error copying image file.", ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
+            imagePath = targetPath;
         }
     }
 
@@ -106,28 +130,13 @@ public class AddController {
         newbook.setTranslators(translators.getText());
         newbook.setPublisher(publisher.getText());
         newbook.setDate(String.valueOf(date.getValue()));
-
-        newbook.setCovertype(covertype.getText());
         newbook.setEdition(edition.getText());
-        try {
-            if(!page.getText().isEmpty()){
-                newbook.setPage(Integer.parseInt(page.getText()));
-            }
-        }catch (Exception E){
-            Alert deleteAlert = new Alert(Alert.AlertType.ERROR,"Back", ButtonType.OK,ButtonType.CLOSE);
-            deleteAlert.setContentText("Invalid page type");
-            deleteAlert.initModality(Modality.APPLICATION_MODAL);
-            deleteAlert.showAndWait();
-            page.clear();
-            return;
-        }
-
         newbook.setTags(tag.getText());
 
         newbook.setRating(bookRating.getRating());
         newbook.setLanguage(language.getText());
         addImage();
-        newbook.setCoverImage(imagePath);
+        newbook.setCover(imagePath);
 
 
         tempResults.add(newbook);
@@ -137,25 +146,41 @@ public class AddController {
         ResetInput();
 
     }
-    public void saveBookInfoToJson(Book book) {
+    public static void saveBookInfoToJson(Book book) {
         JsonObject bookJson = new JsonObject();
         bookJson.addProperty("title", book.getTitle());
         bookJson.addProperty("subtitle", book.getSubtitle());
         bookJson.addProperty("isbn", book.getIsbn());
-        bookJson.addProperty("authors", book.getAuthors());
-        bookJson.addProperty("translators", book.getTranslators());
+
+        JsonArray authorsArray = new JsonArray();
+        for (String author : book.getAuthors().split(",")) {
+            authorsArray.add(author);
+        }
+        bookJson.add("authors", authorsArray);
+
+        //
+        JsonArray translatorsArray = new JsonArray();
+        for (String translator : book.getTranslators().split(",")) {
+            translatorsArray.add(translator);
+        }
+        bookJson.add("translators", translatorsArray);
+
+        JsonArray tagsArray = new JsonArray();
+        for (String tag : book.getTags().split(",")) {
+            tagsArray.add(tag);
+        }
+        bookJson.add("tags", tagsArray);
+
         bookJson.addProperty("publisher", book.getPublisher());
         bookJson.addProperty("date", book.getDate());
-        bookJson.addProperty("covertype", book.getCovertype());
         bookJson.addProperty("edition", book.getEdition());
-        bookJson.addProperty("page", book.getPage());
-        bookJson.addProperty("tag", book.getTags());
-        bookJson.addProperty("coverImage", book.getCoverImage());
+        bookJson.addProperty("cover", book.getCover());
         bookJson.addProperty("rating", book.getRating());
         bookJson.addProperty("language", book.getLanguage());
 
 
-        String folderPath = temporaryFolder;
+
+        String folderPath = "Mylibrary/books/";
         File folder = new File(folderPath);
         if (!folder.exists()) {
             folder.mkdirs();
@@ -192,9 +217,7 @@ public class AddController {
         translators.clear();
         publisher.clear();
         edition.clear();
-        page.clear();
         tag.clear();
-        covertype.clear();
         date.setValue(null);
         language.clear();
         bookRating.setRating(0);
@@ -202,7 +225,7 @@ public class AddController {
     public boolean checkNull(){
         if(title.getText().isEmpty() && subtitle.getText().isEmpty() && isbn.getText().isEmpty() &&
                 authors.getText().isEmpty() && translators.getText().isEmpty() && publisher.getText().isEmpty() && edition.getText().isEmpty() &&
-                page.getText().isEmpty() && tag.getText().isEmpty() && covertype.getText().isEmpty() && language.getText().isEmpty() && bookRating.getRating() == 0 && language.getText().isEmpty() ){
+                tag.getText().isEmpty() && language.getText().isEmpty() && bookRating.getRating() == 0 && language.getText().isEmpty() ){
             return true;
         } if(isbn.getText().isEmpty()){
             return true;

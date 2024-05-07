@@ -1,15 +1,13 @@
 package com.example.Controllers;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,11 +17,14 @@ import javafx.stage.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import static com.example.Controllers.SearchController.searched;
+import static com.example.Controllers.AddController.*;
 
 
 public class MainController implements Initializable {
-    public static String temporaryFolder ="Mylibrary/books/";
     @FXML
     private TableView<Book> bookTableView;
     @FXML
@@ -33,15 +34,11 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Book, String> isbn;
     @FXML
-    private TableColumn<Book, Integer> page;
+    private TableColumn<Book, String> authors;
     @FXML
-    private TableColumn<Book, ArrayList<String>> authors;
-    @FXML
-    private TableColumn<Book, ArrayList<String>> translators;
+    private TableColumn<Book, String> translators;
     @FXML
     private TableColumn<Book, String> publisher;
-    @FXML
-    private TableColumn<Book, String> covertype;
     @FXML
     private TableColumn<Book, String> edition;
     @FXML
@@ -49,7 +46,7 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Book, Double> rating;
     @FXML
-    private TableColumn<Book, ArrayList<String>> tags;
+    private TableColumn<Book, String> tags;
     @FXML
     private TableColumn<Book, String> date;
     public static ObservableList<Book> observableBookList = FXCollections.observableArrayList();
@@ -63,24 +60,20 @@ public class MainController implements Initializable {
     private Window stage;
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bookTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         loadBooksFromJson();
 
 
-
         title.setCellValueFactory(new PropertyValueFactory<Book, String>("Title"));
         subtitle.setCellValueFactory(new PropertyValueFactory<Book, String>("Subtitle"));
         isbn.setCellValueFactory(new PropertyValueFactory<Book, String>("Isbn"));
-        page.setCellValueFactory(new PropertyValueFactory<Book, Integer>("Page"));
-        authors.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("Authors"));
-        translators.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("Translators"));
+        authors.setCellValueFactory(new PropertyValueFactory<Book, String>("Authors"));
+        translators.setCellValueFactory(new PropertyValueFactory<Book, String>("Translators"));
         publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("Publisher"));
-        covertype.setCellValueFactory(new PropertyValueFactory<Book, String>("Covertype"));
         edition.setCellValueFactory(new PropertyValueFactory<Book, String>("Edition"));
-        tags.setCellValueFactory(new PropertyValueFactory<Book, ArrayList<String>>("Tags"));
+        tags.setCellValueFactory(new PropertyValueFactory<Book, String>("Tags"));
         date.setCellValueFactory(new PropertyValueFactory<Book, String>("Date"));
         language.setCellValueFactory(new PropertyValueFactory<Book, String>("language"));
         rating.setCellValueFactory(new PropertyValueFactory<Book, Double>("rating"));
@@ -109,12 +102,12 @@ public class MainController implements Initializable {
 
     @FXML
     public void DeleteButton(ActionEvent event) {
-        if(bookTableView.getSelectionModel().getSelectedItem()==null){
-            Alert nullAlert = new Alert(Alert.AlertType.ERROR,"Back",ButtonType.CLOSE);
+        if (bookTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert nullAlert = new Alert(Alert.AlertType.ERROR, "Back", ButtonType.CLOSE);
             nullAlert.setContentText("You need to select a book to delete!");
             nullAlert.initModality(Modality.WINDOW_MODAL);
             nullAlert.showAndWait();
-        } else{
+        } else {
             if (!observableBookList.isEmpty()) {
                 Alert deleteAlert = new Alert(Alert.AlertType.WARNING, "Confirm", ButtonType.OK, ButtonType.CANCEL);
                 deleteAlert.setContentText("Are you sure you want to delete this?\n\n THIS CANNOT BE UNDONE.");
@@ -128,19 +121,16 @@ public class MainController implements Initializable {
                         deleteSelectedBook(selectedBook);
                     }
 
-                    if(SearchController.searched){
+                    if (searched) {
                         tempResults.removeAll(selectedBooks);
                     }
 
-
-
                     bookTableView.getSelectionModel().clearSelection();
 
-                    if(!SearchController.searched) {
+                    if (!searched) {
                         tempResults.clear();
                         tempResults.addAll(observableBookList);
                     }
-
 
 
                 } else {
@@ -148,21 +138,36 @@ public class MainController implements Initializable {
                 }
             }
         }
-
     }
 
 
     public void deleteSelectedBook(Book selectedBook) {
 
-        String folderPath = temporaryFolder;
+        String folderPath = "Mylibrary/books";
 
         String filePath = folderPath + "/" + selectedBook.getIsbn() + ".json";
+        String imagePath = selectedBook.getCover();
 
         File file = new File(filePath);
 
         if (file.exists()) {
             if (file.delete()) {
                 System.out.println(filePath + " başarıyla silindi.");
+
+
+                if (imagePath != null && !imagePath.isEmpty()) {
+                    File imageFile = new File(imagePath);
+                    if (imageFile.exists()) {
+                        if (imageFile.delete()) {
+                            System.out.println(imagePath + " başarıyla silindi.");
+                        } else {
+                            System.out.println(imagePath + " silinemedi.");
+                        }
+                    } else {
+                        System.out.println("Belirtilen resim dosyası bulunamadı.");
+                    }
+                }
+
             } else {
                 System.out.println(filePath + " silinemedi.");
             }
@@ -189,8 +194,8 @@ public class MainController implements Initializable {
     @FXML
     public void editButton() throws IOException {
 
-        if(bookTableView.getSelectionModel().getSelectedItem()==null){
-            Alert nullAlert = new Alert(Alert.AlertType.ERROR,"Back",ButtonType.CLOSE);
+        if (bookTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert nullAlert = new Alert(Alert.AlertType.ERROR, "Back", ButtonType.CLOSE);
             nullAlert.setContentText("You need to select a book to edit!!");
             nullAlert.initModality(Modality.WINDOW_MODAL);
             nullAlert.showAndWait();
@@ -210,10 +215,6 @@ public class MainController implements Initializable {
             stage.show();
         }
 
-
-
-
-
     }
 
     @FXML
@@ -225,32 +226,137 @@ public class MainController implements Initializable {
                 "Delete Book: Choose a book or books and select \"Delete\" to remove it from the library.\n" +
                 "Edit Book: Update book details by selecting the book to \"Edit\" information.\n" +
                 "Search for Book: Utilize search functionality to locate books based on title, author,ISBN or etc.\n" +
-                "Update: After searching, return to the list where you have started.\n"+
-                "Do not worry all the information of books are stored in the program");
+                "In the search function there is a reset button and resets the current table before any search.\n" +
+                "Do not worry all the information of books are stored in the program\n" +
+                "You can Export the selected books with the File->Export button\n" +
+                "Also you can select any books directory with File->Import button. It will change the current table to the selected directory");
 
         alert.showAndWait();
     }
 
     public void loadBooksFromJson() {
         try {
-            if(observableBookList != null){
-                observableBookList.clear();
-            }
-
-            File folder = new File(temporaryFolder);
+            File folder = new File("Mylibrary/books/");
             File[] listOfFiles = folder.listFiles();
 
             if (listOfFiles != null) {
                 for (File file : listOfFiles) {
                     if (file.isFile() && file.getName().endsWith(".json")) {
-                        System.out.println("Reading file: " + file.getAbsolutePath()); // Debug
+                        System.out.println("Reading file: " + file.getAbsolutePath());
                         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
                             Gson gson = new Gson();
-                            Book book = gson.fromJson(br, Book.class);
-                            observableBookList.add(book);
-                            tempResults.add(book);
+                            JsonObject jsonObject = gson.fromJson(br, JsonObject.class);
+                            Book loadbook = new Book();
+
+                            JsonArray authorsArray = jsonObject.getAsJsonArray("authors");
+                            StringBuilder authorsStringBuilder = new StringBuilder();
+                            for (JsonElement element : authorsArray) {
+                                authorsStringBuilder.append(element.getAsString()).append(", ");
+                            }
+                            String authorsString = authorsStringBuilder.toString().trim();
+
+                            JsonArray tagsArray = jsonObject.getAsJsonArray("tags");
+                            StringBuilder tagsStringBuilder = new StringBuilder();
+                            for (JsonElement element : tagsArray) {
+                                tagsStringBuilder.append(element.getAsString()).append(", ");
+                            }
+                            String tagsString = tagsStringBuilder.toString().trim();
+
+                            JsonArray translatorsArray = jsonObject.getAsJsonArray("translators");
+                            StringBuilder translatorsStringBuilder = new StringBuilder();
+                            for (JsonElement element : translatorsArray) {
+                                translatorsStringBuilder.append(element.getAsString()).append(", ");
+                            }
+                            String translatorsString = translatorsStringBuilder.toString().trim();
+
+
+                            loadbook.setAuthors(authorsString);
+                            loadbook.setTranslators(translatorsString);
+                            loadbook.setTags(tagsString);
+                            loadbook.setTitle(jsonObject.get("title").getAsString());
+                            loadbook.setSubtitle(jsonObject.get("subtitle").getAsString());
+                            loadbook.setLanguage(jsonObject.get("language").getAsString());
+                            loadbook.setIsbn(jsonObject.get("isbn").getAsString());
+                            loadbook.setPublisher(jsonObject.get("publisher").getAsString());
+                            loadbook.setDate(jsonObject.get("date").getAsString());
+                            loadbook.setEdition(jsonObject.get("edition").getAsString());
+                            loadbook.setCover(jsonObject.get("cover").getAsString());
+                            loadbook.setRating(jsonObject.get("rating").getAsDouble());
+
+                            observableBookList.add(loadbook);
+                            tempResults.add(loadbook);
+
                         } catch (IOException e) {
-                            System.err.println("Error reading file: " + file.getAbsolutePath()); // Debug
+                            System.err.println("Error reading file: " + file.getAbsolutePath());
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("Unexpected error: " + ex.getMessage()); // Debug
+            ex.printStackTrace();
+        }
+    }
+
+    private void importSelected(String filepath) {
+        try {
+            File folder = new File(filepath);
+            File[] listOfFiles = folder.listFiles();
+
+            if (listOfFiles != null) {
+                for (File file : listOfFiles) {
+                    if (file.isFile() && file.getName().endsWith(".json")) {
+                        System.out.println("Reading file: " + file.getAbsolutePath());
+                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+                            Gson gson = new Gson();
+                            JsonObject jsonObject = gson.fromJson(br, JsonObject.class);
+                            Book loadbook = new Book();
+
+                            JsonArray authorsArray = jsonObject.getAsJsonArray("authors");
+                            StringBuilder authorsStringBuilder = new StringBuilder();
+                            for (JsonElement element : authorsArray) {
+                                authorsStringBuilder.append(element.getAsString()).append(", ");
+                            }
+                            String authorsString = authorsStringBuilder.toString().trim();
+
+                            JsonArray tagsArray = jsonObject.getAsJsonArray("tags");
+                            StringBuilder tagsStringBuilder = new StringBuilder();
+                            for (JsonElement element : tagsArray) {
+                                tagsStringBuilder.append(element.getAsString()).append(", ");
+                            }
+                            String tagsString = tagsStringBuilder.toString().trim();
+
+                            JsonArray translatorsArray = jsonObject.getAsJsonArray("translators");
+                            StringBuilder translatorsStringBuilder = new StringBuilder();
+                            for (JsonElement element : translatorsArray) {
+                                translatorsStringBuilder.append(element.getAsString()).append(", ");
+                            }
+                            String translatorsString = translatorsStringBuilder.toString().trim();
+
+
+                            loadbook.setAuthors(authorsString);
+                            loadbook.setTranslators(translatorsString);
+                            loadbook.setTags(tagsString);
+                            loadbook.setTitle(jsonObject.get("title").getAsString());
+                            loadbook.setSubtitle(jsonObject.get("subtitle").getAsString());
+                            loadbook.setLanguage(jsonObject.get("language").getAsString());
+                            loadbook.setIsbn(jsonObject.get("isbn").getAsString());
+                            loadbook.setPublisher(jsonObject.get("publisher").getAsString());
+                            loadbook.setDate(jsonObject.get("date").getAsString());
+                            loadbook.setEdition(jsonObject.get("edition").getAsString());
+                            loadbook.setCover(jsonObject.get("cover").getAsString());
+                            loadbook.setRating(jsonObject.get("rating").getAsDouble());
+
+
+
+                            observableBookList.add(loadbook);
+                            tempResults.add(loadbook);
+                            saveBookInfoToJson(loadbook);
+                        } catch (IOException e) {
+                            System.err.println("Error reading file: " + file.getAbsolutePath());
                             e.printStackTrace();
                         }
                     }
@@ -263,7 +369,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void exportButton(ActionEvent event){
+    public void exportButton(ActionEvent event) {
         if (!observableBookList.isEmpty()) {
             Alert exportAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm", ButtonType.OK, ButtonType.CANCEL);
             exportAlert.setContentText("Are you sure you want to export these books?\n\n");
@@ -277,7 +383,7 @@ public class MainController implements Initializable {
                 File selectedDirectory = dc.showDialog(stage);
 
                 for (Book selectedBook : selectedBooks) {
-                    exportAsJSON(selectedBook,selectedDirectory);
+                    exportAsJSON(selectedBook, selectedDirectory);
                 }
 
                 bookTableView.getSelectionModel().clearSelection();
@@ -287,10 +393,7 @@ public class MainController implements Initializable {
         }
     }
 
-    public void exportAsJSON(Book selectedBook,File selectedDirectory) {
-
-        // should we create directory or not ??
-
+    public void exportAsJSON(Book selectedBook, File selectedDirectory) {
         if (selectedDirectory != null) {
             String folderPath = selectedDirectory.getAbsolutePath() + "/ExportedBooks";
             File folder = new File(folderPath);
@@ -305,8 +408,41 @@ public class MainController implements Initializable {
             }
             String filePath = folderPath + "/" + selectedBook.getIsbn() + ".json";
             try (FileWriter writer = new FileWriter(filePath)) {
+
+                JsonObject bookJson = new JsonObject();
+                bookJson.addProperty("title", selectedBook.getTitle());
+                bookJson.addProperty("subtitle", selectedBook.getSubtitle());
+                bookJson.addProperty("isbn", selectedBook.getIsbn());
+
+                JsonArray authorsArray = new JsonArray();
+                for (String author : selectedBook.getAuthors().split(",")) {
+                    authorsArray.add(author);
+                }
+                bookJson.add("authors", authorsArray);
+
+                //
+                JsonArray translatorsArray = new JsonArray();
+                for (String translator : selectedBook.getTranslators().split(",")) {
+                    translatorsArray.add(translator);
+                }
+                bookJson.add("translators", translatorsArray);
+
+                JsonArray tagsArray = new JsonArray();
+                for (String tag : selectedBook.getTags().split(",")) {
+                    tagsArray.add(tag);
+                }
+                bookJson.add("tags", tagsArray);
+
+                bookJson.addProperty("publisher", selectedBook.getPublisher());
+                bookJson.addProperty("date", selectedBook.getDate());
+                bookJson.addProperty("edition", selectedBook.getEdition());
+                bookJson.addProperty("cover", selectedBook.getCover());
+                bookJson.addProperty("rating", selectedBook.getRating());
+                bookJson.addProperty("language", selectedBook.getLanguage());
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                gson.toJson(selectedBook, writer);
+                String jsonString = gson.toJson(bookJson);
+                writer.write(jsonString);
+
                 System.out.println("Book exported as JSON: " + filePath);
             } catch (IOException e) {
                 System.err.println("Error exporting book as JSON: " + e.getMessage());
@@ -314,21 +450,20 @@ public class MainController implements Initializable {
             }
         }
     }
+
     @FXML
     public void importAsJSON() {
         try {
             DirectoryChooser dc = new DirectoryChooser();
             dc.setTitle("Select folder to open!");
             File folder = dc.showDialog(stage);
-            temporaryFolder = folder.getAbsolutePath();
 
-            loadBooksFromJson();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            importSelected(folder.getAbsolutePath());
+        }catch (Exception e){
+            System.out.println("Directory cannot opened");
         }
     }
-    }
+}
 
 
 

@@ -12,7 +12,7 @@ import static com.example.Controllers.MainController.observableBookList;
 import static com.example.Controllers.MainController.tempResults;
 
 public class SearchController {
-    static boolean searched = false;
+    public static boolean searched = false;
     @FXML
     private TextField title;
     @FXML
@@ -28,11 +28,7 @@ public class SearchController {
     @FXML
     private DatePicker date;
     @FXML
-    private TextField covertype;
-    @FXML
     private TextField edition;
-    @FXML
-    private TextField page;
     @FXML
     private TextField tags;
     @FXML
@@ -51,9 +47,7 @@ public class SearchController {
         String translatorSearch = translator.getText().toLowerCase();
         String publisherSearch = publisher.getText().toLowerCase();
         String dateSearch = String.valueOf(date.getValue());
-        String coverTypeSearch = covertype.getText().toLowerCase();
         String editionSearch = edition.getText();
-        String pageSearch = page.getText();
         String tagSearch = tags.getText().toLowerCase();
         double ratingSearch = rating.getRating();
         String languageSearch = language.getText().toLowerCase();
@@ -68,9 +62,7 @@ public class SearchController {
                         (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
                         (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
                         (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
-                        (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains(coverTypeSearch)) &&
                         (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
-                        (pageSearch.isEmpty() || book.getPage() == Integer.parseInt(pageSearch)) &&
                         (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) &&
                         (languageSearch.isEmpty() || book.getLanguage().contains(languageSearch)) && (ratingSearch == 0 || book.getRating() == ratingSearch)) {
                     results.add(book);
@@ -84,9 +76,7 @@ public class SearchController {
                                 (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
                                 (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
                                 (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
-                                (coverTypeSearch.isEmpty() || book.getCovertype().toLowerCase().contains(coverTypeSearch)) &&
                                 (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
-                                (pageSearch.isEmpty() || book.getPage() == Integer.parseInt(pageSearch)) &&
                                 (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) && (dateSearch.isEmpty() || book.getDate().contains(dateSearch)) && (languageSearch.isEmpty() || book.getLanguage().contains(languageSearch))&&
                                 (ratingSearch == 0 || book.getRating() == ratingSearch) ) {
                     results.add(book);
@@ -106,15 +96,14 @@ public class SearchController {
         translator.clear();
         publisher.clear();
         date.setValue(null);
-        covertype.clear();
         edition.clear();
-        page.clear();
         tags.clear();
     }
     @FXML
     public void ResetButton() {
         observableBookList.clear();
         observableBookList.addAll(tempResults);
+        reset();
     }
 
     @FXML

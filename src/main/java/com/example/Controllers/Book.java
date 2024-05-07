@@ -1,6 +1,8 @@
 package com.example.Controllers;
 
 
+import java.lang.reflect.Array;
+
 public class Book {
     public String title;
     public String subtitle;
@@ -9,10 +11,8 @@ public class Book {
     public String isbn;
     public String publisher;
     public String date;
-    public String cover;
     public String edition;
-    public int page;
-    public String coverImage;
+    public String cover;
     public String tags;
     public String language;
     public double rating;
@@ -90,14 +90,6 @@ public class Book {
         this.date = date;
     }
 
-    public String getCovertype() {
-        return cover;
-    }
-
-    public void setCovertype(String coverType) {
-        this.cover = coverType;
-    }
-
     public String getEdition() {
         return edition;
     }
@@ -106,20 +98,12 @@ public class Book {
         this.edition = edition;
     }
 
-    public int getPage() {
-        return page;
+    public String getCover() {
+        return cover;
     }
 
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public String getCoverImage() {
-        return coverImage;
-    }
-
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public void setTags(String tags) {

@@ -2,6 +2,7 @@ package com.example.Controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,9 +14,6 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 
 import static com.example.Controllers.MainController.*;
@@ -46,13 +44,7 @@ public class EditController {
     private DatePicker date;
 
     @FXML
-    private TextField covertype;
-
-    @FXML
     private TextField edition;
-
-    @FXML
-    private TextField page;
 
     @FXML
     private TextField tags;
@@ -94,7 +86,7 @@ public class EditController {
         edited = true;
     }
     public void addImage() {
-        String imagePath = bookToEdit.getCoverImage();
+        String imagePath = bookToEdit.getCover();
 
         if (imagePath != null && !imagePath.isEmpty()) {
             File imageFile = new File(imagePath);
@@ -106,14 +98,14 @@ public class EditController {
         }
                 if (imageFile != null) {
                     String targetPath = imageFile.getAbsolutePath();
-                    bookToEdit.setCoverImage(targetPath);
+                    bookToEdit.setCover(targetPath);
                 }
     }
 
     public void showInformation(Book editbook) {
         bookToEdit = editbook;
 
-        String imagePath = editbook.getCoverImage();
+        String imagePath = editbook.getCover();
         if (imagePath != null && !imagePath.isEmpty()) {
             Image image = new Image(new File(imagePath).toURI().toString());
             imageView.setImage(image);
@@ -141,9 +133,7 @@ public class EditController {
             date.setValue(null);
             checkDateNull = true;
         }
-        covertype.setText(editbook.getCovertype());
         edition.setText(editbook.getEdition());
-        page.setText(String.valueOf(editbook.getPage()));
         rating.setRating(editbook.getRating());
         tags.setText(editbook.getTags());
     }
@@ -162,9 +152,7 @@ public class EditController {
         if (date.getValue() != null) {
             bookToEdit.setDate(date.getValue().toString());
         }
-        bookToEdit.setCovertype(covertype.getText());
         bookToEdit.setEdition(edition.getText());
-        bookToEdit.setPage(Integer.parseInt(page.getText()));
         bookToEdit.setTags(tags.getText());
         bookToEdit.setRating(rating.getRating());
         bookToEdit.setLanguage(language.getText());
@@ -195,7 +183,7 @@ public class EditController {
 
 
     private void updateJsonFile(Book bookToEdit) {
-        String folderPath = temporaryFolder;
+        String folderPath = "Mylibrary/books/";
         String oldFilePath = folderPath + File.separator + tempIsbn + ".json";
         String newFilePath = folderPath + File.separator + bookToEdit.getIsbn() + ".json";
         File oldFile = new File(oldFilePath);
@@ -215,22 +203,34 @@ public class EditController {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonObject bookJson = new JsonObject();
-
-
         bookJson.addProperty("title", bookToEdit.getTitle());
         bookJson.addProperty("subtitle", bookToEdit.getSubtitle());
         bookJson.addProperty("isbn", bookToEdit.getIsbn());
-        bookJson.addProperty("authors", bookToEdit.getAuthors());
-        bookJson.addProperty("translators", bookToEdit.getTranslators());
+
+        JsonArray authorsArray = new JsonArray();
+        for (String author : bookToEdit.getAuthors().split(",")) {
+            authorsArray.add(author);
+        }
+        bookJson.add("authors", authorsArray);
+
+        JsonArray translatorsArray = new JsonArray();
+        for (String translator : bookToEdit.getTranslators().split(",")) {
+            translatorsArray.add(translator);
+        }
+        bookJson.add("translators", translatorsArray);
+
+        JsonArray tagsArray = new JsonArray();
+        for (String tag : bookToEdit.getTags().split(",")) {
+            tagsArray.add(tag);
+        }
+        bookJson.add("tags", tagsArray);
+
         bookJson.addProperty("publisher", bookToEdit.getPublisher());
         bookJson.addProperty("date", bookToEdit.getDate());
-        bookJson.addProperty("cover", bookToEdit.getCovertype());
         bookJson.addProperty("edition", bookToEdit.getEdition());
-        bookJson.addProperty("page", bookToEdit.getPage());
-        bookJson.addProperty("tag", bookToEdit.getTags());
+        bookJson.addProperty("cover", bookToEdit.getCover());
         bookJson.addProperty("rating", bookToEdit.getRating());
         bookJson.addProperty("language", bookToEdit.getLanguage());
-        bookJson.addProperty("coverImage", bookToEdit.getCoverImage());
 
 
         try (FileWriter fileWriter = new FileWriter(newFile)) {
@@ -251,9 +251,7 @@ public class EditController {
         translators.clear();
         publisher.clear();
         edition.clear();
-        page.clear();
         tags.clear();
-        covertype.clear();
         date.setValue(null);
         language.clear();
         rating.setRating(0);

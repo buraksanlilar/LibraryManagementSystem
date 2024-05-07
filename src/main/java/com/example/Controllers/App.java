@@ -15,7 +15,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
-        stage.setTitle("FXMLLoader Example");
+        stage.setTitle("Library Management System");
         stage.setScene(new Scene(fxmlLoader.load(), 1141, 653));
         stage.show();
         stage.setResizable(false);
