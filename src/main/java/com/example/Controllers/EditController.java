@@ -127,6 +127,9 @@ public class EditController {
         publisher.setText(editbook.getPublisher());
         language.setText(editbook.getLanguage());
         if (editbook.getDate() != null && !editbook.getDate().equalsIgnoreCase("null") && !editbook.getDate().isEmpty()) {
+            if(editbook.getDate().contains("-")){
+
+            }
             date.setValue(LocalDate.parse(editbook.getDate()));
             checkDateNull = false;
         } else {

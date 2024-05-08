@@ -1,8 +1,5 @@
 package com.example.Controllers;
 
-
-import java.lang.reflect.Array;
-
 public class Book {
     public String title;
     public String subtitle;

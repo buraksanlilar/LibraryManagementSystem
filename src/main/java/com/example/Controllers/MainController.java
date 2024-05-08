@@ -16,6 +16,9 @@ import javafx.stage.*;
 
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -280,7 +283,17 @@ public class MainController implements Initializable {
                             loadbook.setLanguage(jsonObject.get("language").getAsString());
                             loadbook.setIsbn(jsonObject.get("isbn").getAsString());
                             loadbook.setPublisher(jsonObject.get("publisher").getAsString());
-                            loadbook.setDate(jsonObject.get("date").getAsString());
+
+
+                            if(jsonObject.has("date")){
+                                loadbook.setDate(jsonObject.get("date").getAsString());
+                            }else{
+                                loadbook.setDate("");
+                            }
+
+
+
+
                             loadbook.setEdition(jsonObject.get("edition").getAsString());
                             loadbook.setCover(jsonObject.get("cover").getAsString());
                             loadbook.setRating(jsonObject.get("rating").getAsDouble());
@@ -300,7 +313,6 @@ public class MainController implements Initializable {
             ex.printStackTrace();
         }
     }
-
 
 
     @FXML
@@ -405,68 +417,147 @@ public class MainController implements Initializable {
             System.out.println("Error occurred while importing JSON file(s): " + e.getMessage());
         }
     }
+
     private void importSelected(String filepath) {
         try {
             File folder = new File(filepath);
             if (folder.isFile() && folder.getName().endsWith(".json")) {
                 System.out.println("Reading file: " + folder.getAbsolutePath());
+
                 try (BufferedReader br = new BufferedReader(new FileReader(folder))) {
-
                     Gson gson = new Gson();
-                    JsonObject jsonObject = gson.fromJson(br, JsonObject.class);
-                    Book loadbook = new Book();
+                    JsonParser parser = new JsonParser();
+                    JsonElement jsonElement = parser.parse(br);
 
-                    JsonArray authorsArray = jsonObject.getAsJsonArray("authors");
-                    StringBuilder authorsStringBuilder = new StringBuilder();
-                    for (JsonElement element : authorsArray) {
-                        authorsStringBuilder.append(element.getAsString()).append(", ");
+                    if (jsonElement.isJsonArray()) {
+                        JsonArray jsonArray = jsonElement.getAsJsonArray();
+                        for (JsonElement element : jsonArray) {
+                            processJsonObject(element.getAsJsonObject());
+                        }
+                    } else if (jsonElement.isJsonObject()) {
+                        processJsonObject(jsonElement.getAsJsonObject());
                     }
-                    String authorsString = authorsStringBuilder.toString().trim();
-
-                    JsonArray tagsArray = jsonObject.getAsJsonArray("tags");
-                    StringBuilder tagsStringBuilder = new StringBuilder();
-                    for (JsonElement element : tagsArray) {
-                        tagsStringBuilder.append(element.getAsString()).append(", ");
-                    }
-                    String tagsString = tagsStringBuilder.toString().trim();
-
-                    JsonArray translatorsArray = jsonObject.getAsJsonArray("translators");
-                    StringBuilder translatorsStringBuilder = new StringBuilder();
-                    for (JsonElement element : translatorsArray) {
-                        translatorsStringBuilder.append(element.getAsString()).append(", ");
-                    }
-                    String translatorsString = translatorsStringBuilder.toString().trim();
-
-
-                    loadbook.setAuthors(authorsString);
-                    loadbook.setTranslators(translatorsString);
-                    loadbook.setTags(tagsString);
-                    loadbook.setTitle(jsonObject.get("title").getAsString());
-                    loadbook.setSubtitle(jsonObject.get("subtitle").getAsString());
-                    loadbook.setLanguage(jsonObject.get("language").getAsString());
-                    loadbook.setIsbn(jsonObject.get("isbn").getAsString());
-                    loadbook.setPublisher(jsonObject.get("publisher").getAsString());
-                    loadbook.setDate(jsonObject.get("date").getAsString());
-                    loadbook.setEdition(jsonObject.get("edition").getAsString());
-                    loadbook.setCover(jsonObject.get("cover").getAsString());
-                    loadbook.setRating(jsonObject.get("rating").getAsDouble());
-
-
-
-                    observableBookList.add(loadbook);
-                    tempResults.add(loadbook);
-                    saveBookInfoToJson(loadbook);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+            }
+        } catch (Exception e) {
+
+        }
+    }
+    private void processJsonObject(JsonObject jsonObject) {
+
+        Book loadbook = new Book();
+
+        if (jsonObject.has("authors")) {
+            JsonArray authorsArray = jsonObject.getAsJsonArray("authors");
+            if (authorsArray != null) {
+                StringBuilder authorsStringBuilder = new StringBuilder();
+                for (JsonElement element : authorsArray) {
+                    authorsStringBuilder.append(element.getAsString()).append(", ");
+                }
+                String authorsString = authorsStringBuilder.toString().trim();
+                loadbook.setAuthors(authorsString);
+            }
+        }else{
+            loadbook.setAuthors("");
+        }
+
+        // Process tags
+        if (jsonObject.has("tags")) {
+            JsonArray tagsArray = jsonObject.getAsJsonArray("tags");
+            if (tagsArray != null) {
+                StringBuilder tagsStringBuilder = new StringBuilder();
+                for (JsonElement element : tagsArray) {
+                    tagsStringBuilder.append(element.getAsString()).append(", ");
+                }
+                String tagsString = tagsStringBuilder.toString().trim();
+                loadbook.setTags(tagsString);
+            }
+        }else{
+            loadbook.setTags("");
+        }
+
+        // Process translators
+        if (jsonObject.has("translators")) {
+            JsonArray translatorsArray = jsonObject.getAsJsonArray("translators");
+            if (translatorsArray != null) {
+                StringBuilder translatorsStringBuilder = new StringBuilder();
+                for (JsonElement element : translatorsArray) {
+                    translatorsStringBuilder.append(element.getAsString()).append(", ");
+                }
+                String translatorsString = translatorsStringBuilder.toString().trim();
+                loadbook.setTranslators(translatorsString);
+            }
+        }else{
+            loadbook.setTranslators("");
+        }
+
+        loadbook.setTitle(jsonObject.has("title") ? jsonObject.get("title").getAsString() : "");
+        loadbook.setSubtitle(jsonObject.has("subtitle") ? jsonObject.get("subtitle").getAsString() : "");
+        loadbook.setLanguage(jsonObject.has("language") ? jsonObject.get("language").getAsString() : "");
+        loadbook.setIsbn(jsonObject.has("isbn") ? jsonObject.get("isbn").getAsString() : "");
+        loadbook.setPublisher(jsonObject.has("publisher") ? jsonObject.get("publisher").getAsString() : "");
+
+        if(jsonObject.has("date")) {
+            String dateString = jsonObject.get("date").getAsString();
+            LocalDate date = null;
+
+            String[] formats = {"dd.MM.yyyy", "yyyy-MM-dd", "MM-dd-yyyy", "yyyy/MM/dd"};
+
+            // Try parsing the date with each format until successful
+            for(String format : formats) {
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                    date = LocalDate.parse(dateString, formatter);
+                    break; // Exit the loop if parsing is successful
+                } catch (DateTimeParseException e) {
+                    // If parsing fails with the current format, try the next one
+                }
             }
 
+            if(date != null) {
+                loadbook.setDate(date.toString());
+            }
 
-        } catch (Exception ex) {
-            System.err.println("Unexpected error: " + ex.getMessage()); // Debug
-            ex.printStackTrace();
+        } else {
+            loadbook.setDate("");
         }
+
+        loadbook.setEdition(jsonObject.has("edition") ? jsonObject.get("edition").getAsString() : "");
+        loadbook.setCover(jsonObject.has("cover") ? jsonObject.get("cover").getAsString() : "");
+
+        if (jsonObject.has("rating")) {
+            JsonElement ratingElement = jsonObject.get("rating");
+            if (ratingElement.isJsonPrimitive()) {
+                JsonPrimitive ratingPrimitive = ratingElement.getAsJsonPrimitive();
+                if (ratingPrimitive.isString()) {
+                    try {
+                        double ratingValue = Double.parseDouble(ratingPrimitive.getAsString());
+                        loadbook.setRating(ratingValue);
+                    } catch (NumberFormatException e) {
+                        loadbook.setRating(0.0);
+                    }
+                } else if (ratingPrimitive.isNumber()) {
+                    loadbook.setRating(ratingPrimitive.getAsDouble());
+                } else {
+                    loadbook.setRating(0.0);
+                }
+            } else {
+                loadbook.setRating(0.0);
+            }
+        } else {
+            loadbook.setRating(0.0);
+        }
+
+        if (loadbook.getRating() > 5.0) {
+            loadbook.setRating(loadbook.getRating() * 5.0 / 10.0);
+        }
+            observableBookList.add(loadbook);
+            tempResults.add(loadbook);
+            saveBookInfoToJson(loadbook);
+
     }
 }
 

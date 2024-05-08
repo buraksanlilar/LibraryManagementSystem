@@ -14,32 +14,36 @@
 
 <AnchorPane prefHeight="719.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controllers.AddController">
    <children>
-      <HBox layoutY="42.0" prefHeight="266.0" prefWidth="648.0">
+      <VBox layoutY="42.0">
          <children>
-            <AnchorPane prefHeight="266.0" prefWidth="653.0">
+            <HBox prefHeight="266.0" prefWidth="648.0" VBox.vgrow="NEVER">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="256.0" fitWidth="247.0" layoutX="201.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                  <AnchorPane prefHeight="266.0" prefWidth="653.0" HBox.hgrow="NEVER">
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="256.0" fitWidth="247.0" layoutX="201.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="200.8" AnchorPane.rightAnchor="200.0" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
       <HBox layoutX="2.0" layoutY="299.0" prefHeight="421.0" prefWidth="654.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="299.0">
          <children>
-            <AnchorPane prefHeight="394.0" prefWidth="305.0">
+            <AnchorPane prefHeight="394.0" prefWidth="305.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox layoutY="-9.0" prefHeight="413.0" prefWidth="306.0">
+                  <VBox layoutY="-9.0" prefHeight="413.0" prefWidth="306.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <HBox prefHeight="63.0" prefWidth="504.0">
                            <children>
-                              <HBox prefHeight="55.0" prefWidth="323.0">
+                              <HBox prefHeight="55.0" prefWidth="323.0" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="10.0" />
                                  </HBox.margin>
                                  <children>
-                                    <AnchorPane prefHeight="55.0" prefWidth="298.0">
+                                    <AnchorPane prefHeight="55.0" prefWidth="298.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Book Title" />
-                                          <TextField fx:id="title" layoutX="127.0" layoutY="24.0" />
+                                          <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Book Title" AnchorPane.leftAnchor="52.799999999999976" AnchorPane.rightAnchor="208.6" />
+                                          <TextField fx:id="title" layoutX="127.0" layoutY="24.0" AnchorPane.leftAnchor="127.20000000000002" AnchorPane.rightAnchor="46.599999999999994" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -48,100 +52,76 @@
                         </HBox>
                         <HBox prefHeight="58.0" prefWidth="321.0">
                            <children>
-                              <AnchorPane prefHeight="55.0" prefWidth="313.0">
+                              <AnchorPane prefHeight="55.0" prefWidth="313.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Subtitle" />
-                                    <TextField fx:id="subtitle" layoutX="127.0" layoutY="24.0" />
+                                    <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Subtitle" AnchorPane.leftAnchor="52.799999999999976" AnchorPane.rightAnchor="212.6" />
+                                    <TextField fx:id="subtitle" layoutX="127.0" layoutY="24.0" AnchorPane.leftAnchor="127.20000000000002" AnchorPane.rightAnchor="50.599999999999994" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <AnchorPane prefHeight="58.0" prefWidth="320.0">
+                              <AnchorPane prefHeight="58.0" prefWidth="320.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label contentDisplay="CENTER" layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="ISBN" />
-                                    <TextField fx:id="isbn" layoutX="127.0" layoutY="24.0" />
+                                    <Label contentDisplay="CENTER" layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="ISBN" AnchorPane.leftAnchor="52.800000000000004" AnchorPane.rightAnchor="213.4" />
+                                    <TextField fx:id="isbn" layoutX="127.0" layoutY="24.0" AnchorPane.leftAnchor="127.20000000000002" AnchorPane.rightAnchor="51.400000000000006" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <AnchorPane prefHeight="62.0" prefWidth="358.0">
+                              <AnchorPane prefHeight="62.0" prefWidth="358.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Authors" />
-                                    <TextField fx:id="authors" layoutX="127.0" layoutY="24.0" />
+                                    <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Authors" AnchorPane.leftAnchor="52.800000000000004" AnchorPane.rightAnchor="214.20000000000002" />
+                                    <TextField fx:id="authors" layoutX="127.0" layoutY="24.0" AnchorPane.leftAnchor="127.20000000000002" AnchorPane.rightAnchor="52.20000000000002" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <AnchorPane prefHeight="58.0" prefWidth="311.0">
+                              <AnchorPane prefHeight="58.0" prefWidth="311.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="51.0" layoutY="28.0" prefHeight="18.0" prefWidth="70.0" text="Translators" />
-                                    <TextField fx:id="translators" layoutX="127.0" layoutY="24.0" />
+                                    <Label layoutX="51.0" layoutY="28.0" prefHeight="18.0" prefWidth="70.0" text="Translators" AnchorPane.leftAnchor="51.19999999999999" AnchorPane.rightAnchor="206.6" />
+                                    <TextField fx:id="translators" layoutX="127.0" layoutY="24.0" AnchorPane.leftAnchor="127.20000000000002" AnchorPane.rightAnchor="51.400000000000006" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <AnchorPane prefHeight="66.0" prefWidth="340.0">
+                              <AnchorPane prefHeight="66.0" prefWidth="340.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Publisher" />
-                                    <TextField fx:id="publisher" layoutX="127.0" layoutY="24.0" />
+                                    <Label layoutX="53.0" layoutY="28.0" prefHeight="18.0" prefWidth="61.0" text="Publisher" AnchorPane.leftAnchor="52.800000000000004" AnchorPane.rightAnchor="213.4" />
+                                    <TextField fx:id="publisher" layoutX="127.0" layoutY="24.0" AnchorPane.leftAnchor="127.20000000000002" AnchorPane.rightAnchor="51.400000000000006" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="309.0">
-                           <children>
-                              <AnchorPane prefHeight="62.0" prefWidth="306.0">
-                                 <children>
-                                    <Label layoutX="53.0" layoutY="21.0" prefHeight="18.0" prefWidth="61.0" text="Language" />
-                                    <TextField fx:id="language" layoutX="124.0" layoutY="17.0" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
+                        <HBox layoutX="10.0" layoutY="309.0" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="418.0" prefWidth="306.0">
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="418.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox layoutY="7.0" prefHeight="401.0" prefWidth="306.0">
+                  <VBox layoutY="7.0" prefHeight="401.0" prefWidth="306.0" AnchorPane.leftAnchor="11.199999999999989" AnchorPane.rightAnchor="21.600000000000023">
                      <children>
                         <HBox prefHeight="63.0" prefWidth="504.0">
                            <children>
-                              <AnchorPane prefHeight="45.0" prefWidth="298.0">
+                              <AnchorPane prefHeight="54.0" prefWidth="310.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="72.0" layoutY="19.0" prefHeight="18.0" prefWidth="61.0" text="Date" />
-                                    <DatePicker fx:id="date" layoutX="133.0" layoutY="15.0" prefHeight="26.0" prefWidth="165.0" />
+                                    <Label layoutX="48.0" layoutY="18.0" prefHeight="18.0" prefWidth="61.0" text="Date" AnchorPane.rightAnchor="196.79999999999998" />
+                                    <DatePicker fx:id="date" layoutX="126.0" layoutY="14.0" prefHeight="26.0" prefWidth="165.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="14.799999999999955" />
                                  </children>
                               </AnchorPane>
-                              <HBox prefHeight="55.0" prefWidth="323.0">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </HBox.margin>
-                              </HBox>
                            </children>
                         </HBox>
                         <HBox prefHeight="58.0" prefWidth="321.0">
                            <children>
-                              <AnchorPane prefHeight="57.0" prefWidth="307.0">
-                                 <children>
-                                    <Label layoutX="57.0" layoutY="20.0" text="Cover Type" />
-                                    <TextField fx:id="covertype" layoutX="136.0" layoutY="16.0" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                        <HBox>
-                           <children>
-                              <AnchorPane prefHeight="58.0" prefWidth="311.0">
+                              <AnchorPane prefHeight="58.0" prefWidth="311.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label layoutX="54.0" layoutY="28.0" prefHeight="18.0" prefWidth="77.0" text="Cover Image" />
                                     <Button fx:id="imageButton" layoutX="172.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="30.0" prefWidth="94.0" text="Select Image" />
@@ -149,49 +129,50 @@
                               </AnchorPane>
                            </children>
                         </HBox>
+                        <HBox />
                         <HBox prefHeight="67.0" prefWidth="306.0">
                            <children>
-                              <AnchorPane prefHeight="57.0" prefWidth="307.0">
+                              <AnchorPane prefHeight="57.0" prefWidth="307.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="70.0" layoutY="20.0" text="Edition" />
-                                    <TextField fx:id="edition" layoutX="136.0" layoutY="16.0" />
+                                    <Label layoutX="61.0" layoutY="29.0" text="Edition" />
+                                    <TextField fx:id="edition" layoutX="135.0" layoutY="25.0" AnchorPane.leftAnchor="135.19999999999996" AnchorPane.rightAnchor="21.799999999999983" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="309.0" prefHeight="67.0" prefWidth="306.0">
                            <children>
-                              <AnchorPane prefHeight="57.0" prefWidth="307.0">
+                              <AnchorPane prefHeight="62.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="70.0" layoutY="20.0" text="PageNo" />
-                                    <TextField fx:id="page" layoutX="136.0" layoutY="16.0" />
+                                    <Label layoutX="53.0" layoutY="33.0" prefHeight="18.0" prefWidth="61.0" text="Language" />
+                                    <TextField fx:id="language" layoutX="135.0" layoutY="29.0" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="20.80000000000001" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="256.0" prefHeight="67.0" prefWidth="306.0">
                            <children>
-                              <AnchorPane prefHeight="57.0" prefWidth="307.0">
+                              <AnchorPane prefHeight="57.0" prefWidth="307.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="70.0" layoutY="20.0" text="Tags" />
-                                    <TextField fx:id="tag" layoutX="136.0" layoutY="16.0" />
+                                    <Label layoutX="64.0" layoutY="33.0" text="Tags" />
+                                    <TextField fx:id="tag" layoutX="136.0" layoutY="29.0" AnchorPane.leftAnchor="135.99999999999997" AnchorPane.rightAnchor="20.799999999999983" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="356.0" prefHeight="67.0" prefWidth="306.0">
+                        <HBox layoutX="10.0" layoutY="356.0" prefHeight="67.0" prefWidth="306.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <AnchorPane prefHeight="57.0" prefWidth="307.0">
+                              <AnchorPane prefHeight="57.0" prefWidth="307.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="70.0" layoutY="20.0" text="Rating" />
-                                    <Rating fx:id="bookRating" layoutX="122.0" layoutY="11.0" prefHeight="33.0" prefWidth="212.0" />
+                                    <Label layoutX="56.0" layoutY="30.0" text="Rating" />
+                                    <Rating fx:id="bookRating" layoutX="116.0" layoutY="21.0" prefHeight="34.0" prefWidth="282.0" rating="0.0" />
 
                                        </children>
                               </AnchorPane>
                            </children>
                         </HBox>
                         <HBox prefHeight="0.0" prefWidth="306.0" />
-                        <HBox layoutX="10.0" layoutY="368.0" prefHeight="67.0" prefWidth="306.0">
+                        <HBox layoutX="10.0" layoutY="368.0" prefHeight="67.0" prefWidth="306.0" VBox.vgrow="ALWAYS">
                            <children>
                               <AnchorPane prefHeight="44.0" prefWidth="306.0">
                                  <children>
@@ -208,18 +189,22 @@
             </AnchorPane>
          </children>
       </HBox>
-      <HBox prefHeight="42.0" prefWidth="644.0">
+      <VBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="11.0">
          <children>
-            <AnchorPane prefHeight="39.0" prefWidth="642.0">
+            <HBox prefHeight="42.0" prefWidth="644.0">
                <children>
-                  <Label alignment="CENTER" layoutX="226.0" layoutY="9.0" prefHeight="28.0" prefWidth="182.0" text="Add Books">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
+                  <AnchorPane prefHeight="39.0" prefWidth="642.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" layoutX="226.0" layoutY="9.0" prefHeight="28.0" prefWidth="182.0" text="Add Books" AnchorPane.leftAnchor="225.6" AnchorPane.rightAnchor="235.6">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
    </children>
 </AnchorPane>

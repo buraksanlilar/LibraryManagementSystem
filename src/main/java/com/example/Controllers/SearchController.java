@@ -58,13 +58,13 @@ public class SearchController {
             if (date.getValue() == null) {
                 if ((titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
                         (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
-                        (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&
-                        (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
-                        (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
+                        (isbnSearch.isEmpty() || book.getIsbn().contains(isbnSearch)) &&
+                        (authorsSearch.isEmpty() || book.getAuthors().toLowerCase().contains(authorsSearch)) &&
+                        (translatorSearch.isEmpty() || book.getTranslators().toLowerCase().contains(translatorSearch)) &&
                         (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
-                        (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
-                        (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) &&
-                        (languageSearch.isEmpty() || book.getLanguage().contains(languageSearch)) && (ratingSearch == 0 || book.getRating() == ratingSearch)) {
+                        (editionSearch.isEmpty() || book.getEdition().toLowerCase().contains(editionSearch)) &&
+                        (tagSearch.isEmpty() || book.getTags().toLowerCase().contains(tagSearch)) &&
+                        (languageSearch.isEmpty() || book.getLanguage().toLowerCase().contains(languageSearch)) && (ratingSearch == 0 || book.getRating() == ratingSearch)) {
                     results.add(book);
                 }
             }
@@ -72,12 +72,12 @@ public class SearchController {
                 if (
                         (titleSearch.isEmpty() || book.getTitle().toLowerCase().contains(titleSearch)) &&
                                 (subtitleSearch.isEmpty() || book.getSubtitle().toLowerCase().contains(subtitleSearch)) &&
-                                (isbnSearch.isEmpty() || book.getIsbn().equals(isbnSearch)) &&
-                                (authorsSearch.isEmpty() || book.getAuthors().contains(authorsSearch)) &&
-                                (translatorSearch.isEmpty() || book.getTranslators().contains(translatorSearch)) &&
+                                (isbnSearch.isEmpty() || book.getIsbn().contains(isbnSearch)) &&
+                                (authorsSearch.isEmpty() || book.getAuthors().toLowerCase().contains(authorsSearch)) &&
+                                (translatorSearch.isEmpty() || book.getTranslators().toLowerCase().contains(translatorSearch)) &&
                                 (publisherSearch.isEmpty() || book.getPublisher().toLowerCase().contains(publisherSearch)) &&
-                                (editionSearch.isEmpty() || book.getEdition().equals(editionSearch)) &&
-                                (tagSearch.isEmpty() || book.getTags().contains(tagSearch)) && (dateSearch.isEmpty() || book.getDate().contains(dateSearch)) && (languageSearch.isEmpty() || book.getLanguage().contains(languageSearch))&&
+                                (editionSearch.isEmpty() || book.getEdition().toLowerCase().contains(editionSearch)) &&
+                                (tagSearch.isEmpty() || book.getTags().toLowerCase().contains(tagSearch)) && (dateSearch.isEmpty() || book.getDate().contains(dateSearch)) && (languageSearch.isEmpty() || book.getLanguage().toLowerCase().contains(languageSearch))&&
                                 (ratingSearch == 0 || book.getRating() == ratingSearch) ) {
                     results.add(book);
                 }
@@ -98,6 +98,7 @@ public class SearchController {
         date.setValue(null);
         edition.clear();
         tags.clear();
+        rating.setRating(0);
     }
     @FXML
     public void ResetButton() {

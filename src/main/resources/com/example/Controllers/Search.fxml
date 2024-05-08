@@ -36,35 +36,37 @@
                 </HBox>
                 <HBox>
                     <children>
-                        <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                        <AnchorPane prefHeight="66.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Title">
                                     <font>
                                         <Font size="17.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="title" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" />
-                                <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Subtitle">
+                                <TextField fx:id="title" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="title" AnchorPane.leftAnchor="133.60000000000002" AnchorPane.rightAnchor="237.79999999999998" />
+                                <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Subtitle" AnchorPane.leftAnchor="264.0">
                                     <font>
                                         <Font size="17.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="subtitle" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" />
+                                <TextField fx:id="subtitle" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="subtitle" AnchorPane.leftAnchor="356.8" AnchorPane.rightAnchor="20.600000000000023" />
+                        <VBox layoutX="244.0" layoutY="15.0" prefHeight="26.0" prefWidth="16.0" />
+                        <HBox layoutX="14.0" layoutY="-8.0" prefHeight="78.0" prefWidth="203.0" />
                             </children>
                         </AnchorPane>
                     </children>
                 </HBox>
             <HBox layoutX="10.0" layoutY="59.0">
                <children>
-                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="ISBN">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="isbn" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="isbn" />
-                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Translators">
+                        <TextField fx:id="isbn" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="isbn" AnchorPane.rightAnchor="237.6" />
+                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Translators" AnchorPane.leftAnchor="264.0">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -76,14 +78,14 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="189.0">
                <children>
-                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Publisher">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="publisher" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="publisher" />
+                        <TextField fx:id="publisher" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="publisher" AnchorPane.rightAnchor="237.79999999999998" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Date">
                            <font>
                               <Font size="17.0" />
@@ -96,62 +98,47 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="255.0">
                <children>
-                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Cover">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="covertype" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="cover" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Edition">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
                         <TextField fx:id="edition" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="edition" />
+                        <Label layoutX="32.0" layoutY="21.0" prefHeight="26.0" prefWidth="82.0" text="Language">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="language" layoutX="131.0" layoutY="21.0" prefHeight="26.0" prefWidth="110.0" promptText="language" AnchorPane.rightAnchor="237.6" />
                      </children>
                   </AnchorPane>
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="321.0">
                <children>
-                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label layoutX="36.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Page">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="page" layoutX="127.0" layoutY="15.0" prefHeight="26.0" prefWidth="110.0" promptText="page" />
                         <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="60.0" text="Tags">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
                         <TextField fx:id="tags" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="tags" />
+                        <Label layoutX="24.0" layoutY="19.0" prefHeight="26.0" prefWidth="82.0" text="Authors">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="authors" layoutX="139.0" layoutY="22.0" prefHeight="26.0" prefWidth="104.0" promptText="authors" AnchorPane.rightAnchor="232.2" />
                      </children>
                   </AnchorPane>
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="374.0">
                <children>
-                  <AnchorPane prefHeight="66.0" prefWidth="475.0">
-                     <children>
-                        <Label layoutX="264.0" layoutY="15.0" prefHeight="26.0" prefWidth="82.0" text="Authors">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="authors" layoutX="357.0" layoutY="15.0" prefHeight="26.0" prefWidth="104.0" promptText="authors" />
-                        <Label layoutX="34.0" layoutY="19.0" prefHeight="26.0" prefWidth="82.0" text="Language">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="language" layoutX="128.0" layoutY="19.0" prefHeight="26.0" prefWidth="110.0" promptText="language" />
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane prefHeight="66.0" prefWidth="475.0" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="323.0">
