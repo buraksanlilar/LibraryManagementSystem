@@ -67,6 +67,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bookTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         loadBooksFromJson();
 
 
@@ -230,10 +231,10 @@ public class MainController implements Initializable {
                 "Delete Book: Choose a book or books and select \"Delete\" to remove it from the library.\n" +
                 "Edit Book: Update book details by selecting the book to \"Edit\" information.\n" +
                 "Search for Book: Utilize search functionality to locate books based on title, author,ISBN or etc.\n" +
-                "In the search function there is a reset button and resets the current table before any search.\n" +
+                "In the search function there is a Refresh button and refreshes the current table before any search.\n" +
                 "Do not worry all the information of books are stored in the program\n" +
                 "You can Export the selected books with the File->Export button\n" +
-                "Also you can select any books directory with File->Import button. It will change the current table to the selected directory");
+                "Also you can select any JSON books with File->Import button. It will add to the current table");
 
         alert.showAndWait();
     }
@@ -291,9 +292,6 @@ public class MainController implements Initializable {
                                 loadbook.setDate("");
                             }
 
-
-
-
                             loadbook.setEdition(jsonObject.get("edition").getAsString());
                             loadbook.setCover(jsonObject.get("cover").getAsString());
                             loadbook.setRating(jsonObject.get("rating").getAsDouble());
@@ -317,25 +315,32 @@ public class MainController implements Initializable {
 
     @FXML
     public void exportButton(ActionEvent event) {
-        if (!observableBookList.isEmpty()) {
-            Alert exportAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm", ButtonType.OK, ButtonType.CANCEL);
-            exportAlert.setContentText("Are you sure you want to export these books?\n\n");
-            exportAlert.initModality(Modality.APPLICATION_MODAL);
-            exportAlert.showAndWait();
+        if (bookTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert nullAlert = new Alert(Alert.AlertType.ERROR, "Back", ButtonType.CLOSE);
+            nullAlert.setContentText("You need to select a book to export!");
+            nullAlert.initModality(Modality.WINDOW_MODAL);
+            nullAlert.showAndWait();
+        } else {
+            if (!observableBookList.isEmpty()) {
+                Alert exportAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm", ButtonType.OK, ButtonType.CANCEL);
+                exportAlert.setContentText("Are you sure you want to export these books?\n\n");
+                exportAlert.initModality(Modality.APPLICATION_MODAL);
+                exportAlert.showAndWait();
 
-            if (exportAlert.getResult() == ButtonType.OK) {
-                ArrayList<Book> selectedBooks = new ArrayList<>(bookTableView.getSelectionModel().getSelectedItems());
-                DirectoryChooser dc = new DirectoryChooser();
-                dc.setTitle("Select folder to save books");
-                File selectedDirectory = dc.showDialog(stage);
+                if (exportAlert.getResult() == ButtonType.OK) {
+                    ArrayList<Book> selectedBooks = new ArrayList<>(bookTableView.getSelectionModel().getSelectedItems());
+                    DirectoryChooser dc = new DirectoryChooser();
+                    dc.setTitle("Select folder to save books");
+                    File selectedDirectory = dc.showDialog(stage);
 
-                for (Book selectedBook : selectedBooks) {
-                    exportAsJSON(selectedBook, selectedDirectory);
+                    for (Book selectedBook : selectedBooks) {
+                        exportAsJSON(selectedBook, selectedDirectory);
+                    }
+
+                    bookTableView.getSelectionModel().clearSelection();
+                } else {
+                    exportAlert.close();
                 }
-
-                bookTableView.getSelectionModel().clearSelection();
-            } else {
-                exportAlert.close();
             }
         }
     }
