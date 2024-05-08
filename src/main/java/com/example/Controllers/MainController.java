@@ -552,6 +552,7 @@ public class MainController implements Initializable {
             } else {
                 loadbook.setRating(0.0);
             }
+            //setting rating
         } else {
             loadbook.setRating(0.0);
         }
