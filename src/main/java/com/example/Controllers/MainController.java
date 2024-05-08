@@ -18,6 +18,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.example.Controllers.SearchController.searched;
@@ -300,73 +301,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private void importSelected(String filepath) {
-        try {
-            File folder = new File(filepath);
-            File[] listOfFiles = folder.listFiles();
 
-            if (listOfFiles != null) {
-                for (File file : listOfFiles) {
-                    if (file.isFile() && file.getName().endsWith(".json")) {
-                        System.out.println("Reading file: " + file.getAbsolutePath());
-                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-
-                            Gson gson = new Gson();
-                            JsonObject jsonObject = gson.fromJson(br, JsonObject.class);
-                            Book loadbook = new Book();
-
-                            JsonArray authorsArray = jsonObject.getAsJsonArray("authors");
-                            StringBuilder authorsStringBuilder = new StringBuilder();
-                            for (JsonElement element : authorsArray) {
-                                authorsStringBuilder.append(element.getAsString()).append(", ");
-                            }
-                            String authorsString = authorsStringBuilder.toString().trim();
-
-                            JsonArray tagsArray = jsonObject.getAsJsonArray("tags");
-                            StringBuilder tagsStringBuilder = new StringBuilder();
-                            for (JsonElement element : tagsArray) {
-                                tagsStringBuilder.append(element.getAsString()).append(", ");
-                            }
-                            String tagsString = tagsStringBuilder.toString().trim();
-
-                            JsonArray translatorsArray = jsonObject.getAsJsonArray("translators");
-                            StringBuilder translatorsStringBuilder = new StringBuilder();
-                            for (JsonElement element : translatorsArray) {
-                                translatorsStringBuilder.append(element.getAsString()).append(", ");
-                            }
-                            String translatorsString = translatorsStringBuilder.toString().trim();
-
-
-                            loadbook.setAuthors(authorsString);
-                            loadbook.setTranslators(translatorsString);
-                            loadbook.setTags(tagsString);
-                            loadbook.setTitle(jsonObject.get("title").getAsString());
-                            loadbook.setSubtitle(jsonObject.get("subtitle").getAsString());
-                            loadbook.setLanguage(jsonObject.get("language").getAsString());
-                            loadbook.setIsbn(jsonObject.get("isbn").getAsString());
-                            loadbook.setPublisher(jsonObject.get("publisher").getAsString());
-                            loadbook.setDate(jsonObject.get("date").getAsString());
-                            loadbook.setEdition(jsonObject.get("edition").getAsString());
-                            loadbook.setCover(jsonObject.get("cover").getAsString());
-                            loadbook.setRating(jsonObject.get("rating").getAsDouble());
-
-
-
-                            observableBookList.add(loadbook);
-                            tempResults.add(loadbook);
-                            saveBookInfoToJson(loadbook);
-                        } catch (IOException e) {
-                            System.err.println("Error reading file: " + file.getAbsolutePath());
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            System.err.println("Unexpected error: " + ex.getMessage()); // Debug
-            ex.printStackTrace();
-        }
-    }
 
     @FXML
     public void exportButton(ActionEvent event) {
@@ -454,13 +389,83 @@ public class MainController implements Initializable {
     @FXML
     public void importAsJSON() {
         try {
-            DirectoryChooser dc = new DirectoryChooser();
-            dc.setTitle("Select folder to open!");
-            File folder = dc.showDialog(stage);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select JSON file(s) to import");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+            List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
 
-            importSelected(folder.getAbsolutePath());
-        }catch (Exception e){
-            System.out.println("Directory cannot opened");
+            if (selectedFiles != null) {
+                for (File file : selectedFiles) {
+                    importSelected(file.getAbsolutePath());
+                }
+            } else {
+                System.out.println("No file(s) selected");
+            }
+        } catch (Exception e) {
+            System.out.println("Error occurred while importing JSON file(s): " + e.getMessage());
+        }
+    }
+    private void importSelected(String filepath) {
+        try {
+            File folder = new File(filepath);
+            if (folder.isFile() && folder.getName().endsWith(".json")) {
+                System.out.println("Reading file: " + folder.getAbsolutePath());
+                try (BufferedReader br = new BufferedReader(new FileReader(folder))) {
+
+                    Gson gson = new Gson();
+                    JsonObject jsonObject = gson.fromJson(br, JsonObject.class);
+                    Book loadbook = new Book();
+
+                    JsonArray authorsArray = jsonObject.getAsJsonArray("authors");
+                    StringBuilder authorsStringBuilder = new StringBuilder();
+                    for (JsonElement element : authorsArray) {
+                        authorsStringBuilder.append(element.getAsString()).append(", ");
+                    }
+                    String authorsString = authorsStringBuilder.toString().trim();
+
+                    JsonArray tagsArray = jsonObject.getAsJsonArray("tags");
+                    StringBuilder tagsStringBuilder = new StringBuilder();
+                    for (JsonElement element : tagsArray) {
+                        tagsStringBuilder.append(element.getAsString()).append(", ");
+                    }
+                    String tagsString = tagsStringBuilder.toString().trim();
+
+                    JsonArray translatorsArray = jsonObject.getAsJsonArray("translators");
+                    StringBuilder translatorsStringBuilder = new StringBuilder();
+                    for (JsonElement element : translatorsArray) {
+                        translatorsStringBuilder.append(element.getAsString()).append(", ");
+                    }
+                    String translatorsString = translatorsStringBuilder.toString().trim();
+
+
+                    loadbook.setAuthors(authorsString);
+                    loadbook.setTranslators(translatorsString);
+                    loadbook.setTags(tagsString);
+                    loadbook.setTitle(jsonObject.get("title").getAsString());
+                    loadbook.setSubtitle(jsonObject.get("subtitle").getAsString());
+                    loadbook.setLanguage(jsonObject.get("language").getAsString());
+                    loadbook.setIsbn(jsonObject.get("isbn").getAsString());
+                    loadbook.setPublisher(jsonObject.get("publisher").getAsString());
+                    loadbook.setDate(jsonObject.get("date").getAsString());
+                    loadbook.setEdition(jsonObject.get("edition").getAsString());
+                    loadbook.setCover(jsonObject.get("cover").getAsString());
+                    loadbook.setRating(jsonObject.get("rating").getAsDouble());
+
+
+
+                    observableBookList.add(loadbook);
+                    tempResults.add(loadbook);
+                    saveBookInfoToJson(loadbook);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        } catch (Exception ex) {
+            System.err.println("Unexpected error: " + ex.getMessage()); // Debug
+            ex.printStackTrace();
         }
     }
 }
