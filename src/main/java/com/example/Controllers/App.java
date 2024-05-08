@@ -18,7 +18,7 @@ public class App extends Application {
         stage.setTitle("Library Management System");
         stage.setScene(new Scene(fxmlLoader.load(), 1141, 653));
         stage.show();
-        stage.setResizable(false);
+        stage.setResizable(true);
 
 
     }

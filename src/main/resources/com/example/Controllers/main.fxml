@@ -61,8 +61,8 @@
                                                         <TableColumn fx:id="publisher" maxWidth="1.7976931348623157E308" prefWidth="100.0" resizable="false" text="Publisher" />
                                                         <TableColumn fx:id="covertype" maxWidth="1.7976931348623157E308" prefWidth="100.0" resizable="true" text="Cover type" />
                                                         <TableColumn fx:id="edition" maxWidth="1.7976931348623157E308" prefWidth="50.0" resizable="true" text="Edition" />
-                                                        <TableColumn fx:id="tags" maxWidth="1.7976931348623157E308" prefWidth="150.0" resizable="true" text="Tags" />
-                                                        <TableColumn fx:id="date" maxWidth="1.7976931348623157E308" prefWidth="100.0" resizable="true" text="Date" />
+                                                        <TableColumn fx:id="tags" maxWidth="1.7976931348623157E308" prefWidth="90.0" resizable="true" text="Tags" />
+                                                        <TableColumn fx:id="date" maxWidth="1.7976931348623157E308" prefWidth="160.0" resizable="true" text="Date" />
                                                         <TableColumn fx:id="language" maxWidth="1.7976931348623157E308" prefWidth="100.0" resizable="true" text="Language" />
                                                         <TableColumn fx:id="rating" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="100.0" resizable="true" text="Rating" />
                                                     </columns>

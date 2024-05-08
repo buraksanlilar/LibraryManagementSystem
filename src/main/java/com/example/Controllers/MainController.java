@@ -191,7 +191,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        addButton.setResizable(false);
+        addButton.setResizable(true);
 
         addButton.show();
     }
